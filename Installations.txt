@@ -1,0 +1,12 @@
+#React Native Website: https://reactnative.dev/docs/environment-setup
+#To install and create an expo project:
+    npm install -g expo-cli
+    npx create-expo-app Mobile-App
+    cd Mobile-App
+    npx expo install react-native-web@~0.19.6 react-dom@18.2.0 @expo/webpack-config@^19.0.0
+    npx expo start
+#To install linter:
+    npm install eslint @react-native-community/eslint-config --save-dev
+    npx lint
+    npm run lint
+    (format on save) from setting: checked
