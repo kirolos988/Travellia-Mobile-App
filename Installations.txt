@@ -1,8 +1,9 @@
-#React Native Website: https://reactnative.dev/docs/environment-setup
+#React Native Docs: https://reactnative.dev/docs/environment-setup
+#React Navigation Docs: https://reactnavigation.org/docs/getting-started/
 #To install and create an expo project:
     npm install -g expo-cli
     npx create-expo-app Mobile-App
-    cd Mobile-App
+    cd Travellia-Mobile-App
     npx expo install react-native-web@~0.19.6 react-dom@18.2.0 @expo/webpack-config@^19.0.0
     npx expo start
 #To install linter:
@@ -10,3 +11,8 @@
     npx lint
     npm run lint
     (format on save) from setting: checked
+#To install handle screen libraries:
+    npm install react-native-screens react-native-safe-area-context
+#To install bottom tabs navigator
+    npm install @react-navigation/native
+    npm install @react-navigation/bottom-tabs
