@@ -10,3 +10,7 @@
     npx lint
     npm run lint
     (format on save) from setting: checked
+
+#To install bottom tabs navigator
+    npm install @react-navigation/native
+    npm install @react-navigation/bottom-tabs
