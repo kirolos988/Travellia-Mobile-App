@@ -14,3 +14,4 @@
 #To install bottom tabs navigator
     npm install @react-navigation/native
     npm install @react-navigation/bottom-tabs
+    

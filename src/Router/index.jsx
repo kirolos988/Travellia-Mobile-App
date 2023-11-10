@@ -21,6 +21,7 @@ const Router = () => {
           tabBarStyle: {
             borderTopColor: '#84E9BD',
             borderTopWidth: 2,
+            
           },
          
         }}>
@@ -34,18 +35,9 @@ const Router = () => {
             ),
             tabBarLabel: 'Explore',
             tabBarLabelPosition: 'below-icon',
+            headerShown:false,
           }}/>
-          <Tab.Screen name="Favourites" component={Favourites} options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="heart-outline"
-                size={size}
-                color={color}
-              />
-            ),
-            tabBarLabel: 'Favourites',
-            tabBarLabelPosition: 'below-icon'
-          }}/>
+          
       <Tab.Screen name="Settings" component={Search} options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -54,9 +46,22 @@ const Router = () => {
                 color={color}
               />
             ),
+            headerShown:false,
             tabBarLabel: 'Search',
             tabBarLabelPosition: 'below-icon'
           }} />
+          <Tab.Screen name="Favourites" component={Favourites} options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="heart-outline"
+                size={size}
+                color={color}
+              />
+            ),
+            headerShown:false,
+            tabBarLabel: 'Favourites',
+            tabBarLabelPosition: 'below-icon'
+          }}/>
     </Tab.Navigator>
     </NavigationContainer>
   )
