@@ -11,58 +11,52 @@ const Tab = createBottomTabNavigator();
 const Router = () => {
   return (
     <NavigationContainer>
-     <Tab.Navigator  tabBarOptions={{
-          activeTintColor: 'black',
-          
-          labelStyle: {
-            fontSize: 12,
-            fontWeight: 'bold',
-          },
-          tabBarStyle: {
-            borderTopColor: '#84E9BD',
-            borderTopWidth: 2,
-            
-          },
-         
-        }}>
-      <Tab.Screen name="Home" component={Home} options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="home-outline"
-                size={size}
-                color={color}
-              />
-            ),
-            tabBarLabel: 'Explore',
-            tabBarLabelPosition: 'below-icon',
-            headerShown:false,
-          }}/>
-          
-      <Tab.Screen name="Settings" component={Search} options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="book-search-outline"
-                size={size}
-                color={color}
-              />
-            ),
-            headerShown:false,
-            tabBarLabel: 'Search',
-            tabBarLabelPosition: 'below-icon'
-          }} />
-          <Tab.Screen name="Favourites" component={Favourites} options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="heart-outline"
-                size={size}
-                color={color}
-              />
-            ),
-            headerShown:false,
-            tabBarLabel: 'Favourites',
-            tabBarLabelPosition: 'below-icon'
-          }}/>
-    </Tab.Navigator>
+      <Tab.Navigator tabBarOptions={{
+        activeTintColor: 'black',
+        labelStyle: {
+          fontSize: 12,
+          fontWeight: 'bold',
+        },
+        tabBarStyle: {
+          borderTopColor: '#84E9BD',
+          borderTopWidth: 2,
+        },
+        headerShown:false,
+      }}>
+        <Tab.Screen name="Home" component={Home} options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="home-outline"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarLabel: 'Explore',
+          tabBarLabelPosition: 'below-icon',
+        }}/>  
+        <Tab.Screen name="Settings" component={Search} options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="book-search-outline"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarLabel: 'Search',
+          tabBarLabelPosition: 'below-icon',
+        }} />
+        <Tab.Screen name="Favourites" component={Favourites} options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="heart-outline"
+              size={size}
+              color={color}
+            />
+          ),
+          tabBarLabel: 'Favourites',
+          tabBarLabelPosition: 'below-icon',
+        }}/>
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }
