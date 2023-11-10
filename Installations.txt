@@ -13,3 +13,6 @@
     (format on save) from setting: checked
 #To install handle screen libraries:
     npm install react-native-screens react-native-safe-area-context
+#To install bottom tabs navigator
+    npm install @react-navigation/native
+    npm install @react-navigation/bottom-tabs
