@@ -1,12 +1,13 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from 'react-native';
+import React from 'react';
+import SearchRsultComponent from '../components/SearchResult/SearchRsultComponent';
 
 const Home = () => {
   return (
     <View>
-      <Text>Home</Text>
+      <SearchRsultComponent />
     </View>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
