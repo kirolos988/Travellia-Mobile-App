@@ -36,17 +36,8 @@ const Router = () => {
           ),
           tabBarLabel: 'Explore',
           tabBarLabelPosition: 'below-icon',
-<<<<<<< HEAD
           headerShown:false
         }}/>  
-=======
-          style: {
-            // borderTopColor: '#84E9BD',
-            // borderTopWidth: 3,
-          },
-          
-        }} />  
->>>>>>> e6bb4e6da23e2581baad9ada7b01f9bbee5598dc
         <Tab.Screen name="Settings" component={Search} options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons

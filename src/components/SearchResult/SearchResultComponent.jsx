@@ -1,68 +1,78 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { hotelsAxios } from '../../store/AxiosUrl';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-const SearchResultComponent = () => {
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-
+const SearchResultComponent = ({ image, name, rating, locationName }) => {
+  const [coloredCircles, setColoredCircles] = useState([]);
   useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const data = await hotelsAxios();
-        setHotels(data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
+    const fullCirclesCount = Math.floor(rating);
+    const hasHalfCircle = rating % 1 !== 0;
+
+    const circles = new Array(5).fill(false).map((_, index) => {
+      if (index < fullCirclesCount) {
+        return (
+          <View
+            key={index}
+            style={[styles.circle, styles.coloredCircle]}
+          ></View>
+        );
+      } else if (index === fullCirclesCount && hasHalfCircle) {
+        return (
+          <View key={index} style={[styles.circle, styles.halfColoredCircle]}></View>
+        );
+      } else {
+        return <View key={index} style={styles.circle}></View>;
       }
-    };
-    fetchHotels();
-  }, []);
+    });
+
+    setColoredCircles(circles);
+  }, [rating]);
 
   return (
     <View style={styles.container}>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : hotels ? (
-        <FlatList
-          horizontal
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          legacyImplementation={false}
-          data={hotels}
-          renderItem={({ item }) => (
-            <View style={styles.itemContainer}>
-              <Text>{item.name}</Text>
-            </View>
-          )}
-          keyExtractor={(item, index) => index.toString()}
+      <View style={styles.itemContainer}>
+        <Image
+          source={{ uri: image }}
+          style={{ width: '100%', height: 300, borderRadius: 7 }}
         />
-      ) : (
-        <Text>No response yet</Text>
-      )}
+        <Text>{name}</Text>
+        <View style={styles.ratingContainer}>{coloredCircles}</View>
+        <Text>{locationName}</Text>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     padding: 24,
     borderColor: 'black',
-    // borderLeftWidth: 1,
-    // borderBottomWidth: 1,
-    // borderRightWidth: 1,
-    // borderTopWidth: 1,
-    // height: 200,
   },
   itemContainer: {
-    height: 100,
-    borderLeftWidth: 1,
-    borderBottomWidth: 1,
-    borderRightWidth: 1,
-    borderTopWidth: 1,
+    width: 270,
+    borderRadius: 5,
     margin: 10,
     borderColor: 'black',
     justifyContent: 'center',
   },
+  circle: {
+    width: 15,
+    height: 15,
+    borderRadius: 7.5,
+    backgroundColor: 'white',
+    marginRight: 5,
+    borderColor: '#00AA6C',
+    borderWidth: 1,
+  },
+  coloredCircle: {
+    backgroundColor: '#00AA6C',
+  },
+  halfColoredCircle: {
+    background: 'linear-gradient(90deg, white 50%, #00AA6C 50%)',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 });
+
 export default SearchResultComponent;
