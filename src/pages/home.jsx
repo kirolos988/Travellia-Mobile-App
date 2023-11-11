@@ -1,13 +1,13 @@
-import { View, Text } from 'react-native';
 import React from 'react';
-import SearchRsultComponent from '../components/SearchResult/SearchRsultComponent';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import SearchResultComponent from '../components/SearchResult/SearchResultComponent';
 
 const Home = () => {
   return (
-    <View>
-      <SearchRsultComponent />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SearchResultComponent />
+    </SafeAreaView>
   );
 };
 
-export default Home;
+export default Home;
