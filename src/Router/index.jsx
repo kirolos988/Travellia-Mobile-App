@@ -33,6 +33,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Explore',
           tabBarLabelPosition: 'below-icon',
+          headerShown:false
         }}/>  
         <Tab.Screen name="Settings" component={Search} options={{
           tabBarIcon: ({ color, size }) => (
@@ -44,6 +45,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Search',
           tabBarLabelPosition: 'below-icon',
+          headerShown:false
         }} />
         <Tab.Screen name="Favourites" component={Favourites} options={{
           tabBarIcon: ({ color, size }) => (
@@ -55,6 +57,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Favourites',
           tabBarLabelPosition: 'below-icon',
+          headerShown:false
         }}/>
       </Tab.Navigator>
     </NavigationContainer>

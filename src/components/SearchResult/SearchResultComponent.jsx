@@ -1,7 +1,13 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
-const SearchResultComponent = ({ image, name, rating, locationName }) => {
+const SearchResultComponent = ({
+  image,
+  name,
+  rating,
+  locationName,
+  reviews,
+}) => {
   const [coloredCircles, setColoredCircles] = useState([]);
   useEffect(() => {
     const fullCirclesCount = Math.floor(rating);
@@ -23,7 +29,7 @@ const SearchResultComponent = ({ image, name, rating, locationName }) => {
               height: 15,
               borderRadius: 7.5,
               borderColor: '#00AA6C',
-              borderWidth:1,
+              borderWidth: 1,
               marginRight: 5,
             }}
           >
@@ -45,9 +51,11 @@ const SearchResultComponent = ({ image, name, rating, locationName }) => {
           source={{ uri: image }}
           style={{ width: '100%', height: 300, borderRadius: 7 }}
         />
-        <Text>{name}</Text>
-        <View style={styles.ratingContainer}>{coloredCircles}</View>
-        <Text>{locationName}</Text>
+        <Text style={[styles.scale ,styles.name]}  numberOfLines={1} ellipsizeMode="tail">{name}</Text>
+        <View style={styles.ratingContainer}>
+          {coloredCircles} <Text style={{marginLeft:10}}>{reviews} review</Text>
+        </View>
+        <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">{locationName}</Text>
       </View>
     </View>
   );
@@ -59,11 +67,20 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
   itemContainer: {
-    width: 270,
+    width: 290,
     borderRadius: 5,
-    margin: 10,
+    margin: 0,
     borderColor: 'black',
     justifyContent: 'center',
+  },
+  scale: {
+    padding: 3,
+    marginVertical: 3,
+    
+  },
+  name:{
+    fontWeight:"700",
+    fontSize:17
   },
   circle: {
     width: 15,
@@ -89,6 +106,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 2,
   },
 });
 
