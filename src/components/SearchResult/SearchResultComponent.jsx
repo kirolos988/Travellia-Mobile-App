@@ -51,11 +51,20 @@ const SearchResultComponent = ({
           source={{ uri: image }}
           style={{ width: '100%', height: 300, borderRadius: 7 }}
         />
-        <Text style={[styles.scale ,styles.name]}  numberOfLines={1} ellipsizeMode="tail">{name}</Text>
+        <Text
+          style={[styles.scale, styles.name]}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {name}
+        </Text>
         <View style={styles.ratingContainer}>
-          {coloredCircles} <Text style={{marginLeft:10}}>{reviews} review</Text>
+          <Text>{coloredCircles}</Text>
+          <Text style={styles.reviews}>{reviews} review</Text>
         </View>
-        <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">{locationName}</Text>
+        <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">
+          {locationName}
+        </Text>
       </View>
     </View>
   );
@@ -63,8 +72,10 @@ const SearchResultComponent = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 24,
+    paddingVertical: 30,
+    paddingHorizontal: 15,
     borderColor: 'black',
+    color: 'white',
   },
   itemContainer: {
     width: 290,
@@ -72,21 +83,27 @@ const styles = StyleSheet.create({
     margin: 0,
     borderColor: 'black',
     justifyContent: 'center',
+    color: 'white',
   },
   scale: {
     padding: 3,
     marginVertical: 3,
-    
+    color: 'white',
   },
-  name:{
-    fontWeight:"700",
-    fontSize:17
+  reviews: {
+    color: 'white',
+    marginLeft: 10,
+  },
+  name: {
+    fontWeight: '700',
+    fontSize: 17,
+    color: 'white',
   },
   circle: {
     width: 15,
     height: 15,
     borderRadius: 7.5,
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     marginRight: 5,
     borderColor: '#00AA6C',
     borderWidth: 1,
@@ -96,8 +113,7 @@ const styles = StyleSheet.create({
   },
   halfColoredCircle: {
     width: 7,
-    height: 14,
-
+    height: 13,
     borderBottomLeftRadius: 7.5,
     borderTopLeftRadius: 7.5,
     backgroundColor: '#00AA6C',
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 2,
+    paddingHorizontal: 0,
   },
 });
 
