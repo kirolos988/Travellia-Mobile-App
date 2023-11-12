@@ -17,7 +17,18 @@ const SearchResultComponent = ({ image, name, rating, locationName }) => {
         );
       } else if (index === fullCirclesCount && hasHalfCircle) {
         return (
-          <View key={index} style={[styles.circle, styles.halfColoredCircle]}></View>
+          <View
+            style={{
+              width: 15,
+              height: 15,
+              borderRadius: 7.5,
+              borderColor: '#00AA6C',
+              borderWidth:1,
+              marginRight: 5,
+            }}
+          >
+            <View key={index} style={[styles.halfColoredCircle]}></View>
+          </View>
         );
       } else {
         return <View key={index} style={styles.circle}></View>;
@@ -67,7 +78,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#00AA6C',
   },
   halfColoredCircle: {
-    background: 'linear-gradient(90deg, white 50%, #00AA6C 50%)',
+    width: 7,
+    height: 14,
+
+    borderBottomLeftRadius: 7.5,
+    borderTopLeftRadius: 7.5,
+    backgroundColor: '#00AA6C',
+    borderColor: '#00AA6C',
   },
   ratingContainer: {
     flexDirection: 'row',
