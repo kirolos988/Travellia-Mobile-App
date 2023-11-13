@@ -12,11 +12,18 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator tabBarOptions={{
-        activeTintColor: 'black',
+        indicatorStyle: {
+          borderWidth: 2,
+          borderColor: 'red',
+        },
+        activeTintColor: 'white',
+        activeBackgroundColor:'black',
+        inactiveBackgroundColor:'black',
         labelStyle: {
           fontSize: 12,
           fontWeight: 'bold',
         },
+        
         tabBarStyle: {
           borderTopColor: '#84E9BD',
           borderTopWidth: 2,
@@ -33,7 +40,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Explore',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }}/>  
         <Tab.Screen name="Settings" component={Search} options={{
           tabBarIcon: ({ color, size }) => (
@@ -45,7 +52,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Search',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }} />
         <Tab.Screen name="Favourites" component={Favourites} options={{
           tabBarIcon: ({ color, size }) => (
@@ -57,7 +64,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Favourites',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }}/>
       </Tab.Navigator>
     </NavigationContainer>
