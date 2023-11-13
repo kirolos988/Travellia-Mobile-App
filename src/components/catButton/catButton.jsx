@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
         borderRadius:20,
         fontSize: 20,
         color: '#333',
+        outlineWidth: 0, 
     },
 })
 
