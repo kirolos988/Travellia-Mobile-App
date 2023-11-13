@@ -11,17 +11,22 @@ const Tab = createBottomTabNavigator();
 const Router = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBarOptions={{
-        activeTintColor: 'black',
+      <Tab.Navigator screenOptions={{
         labelStyle: {
           fontSize: 12,
           fontWeight: 'bold',
         },
         tabBarStyle: {
-          borderTopColor: '#84E9BD',
-          borderTopWidth: 2,
+          borderTopColor: '#222',
+          borderTopWidth: 1,
+          backgroundColor: '#222',
         },
         headerShown:false,
+      }}
+      tabBarOptions={{
+        activeTintColor: 'white',
+        inactiveTintColor: 'gray', 
+        active
       }}>
         <Tab.Screen name="Home" component={Home} options={{
           tabBarIcon: ({ color, size }) => (
@@ -33,7 +38,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Explore',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }}/>  
         <Tab.Screen name="Settings" component={Search} options={{
           tabBarIcon: ({ color, size }) => (
@@ -45,7 +50,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Search',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }} />
         <Tab.Screen name="Favourites" component={Favourites} options={{
           tabBarIcon: ({ color, size }) => (
@@ -57,7 +62,7 @@ const Router = () => {
           ),
           tabBarLabel: 'Favourites',
           tabBarLabelPosition: 'below-icon',
-          headerShown:false
+          headerShown:false,
         }}/>
       </Tab.Navigator>
     </NavigationContainer>

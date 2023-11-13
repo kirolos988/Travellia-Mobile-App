@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Favourites = () => {
   return (
-    <View>
+    <SafeAreaView style={styles.mainContainer}>
       <Text>Favourites</Text>
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default Favourites
+export default Favourites;
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: '#181818',
+    flex: 1,
+  },
+});

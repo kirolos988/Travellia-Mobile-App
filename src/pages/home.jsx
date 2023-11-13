@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, ScrollView, Text } from 'react-native';
+import {
+  SafeAreaView,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import SearchResultComponent from '../components/SearchResult/SearchResultComponent';
 import { hotelsAxios } from '../store/AxiosUrl';
 
@@ -21,9 +28,9 @@ const Home = () => {
 
     fetchHotels();
   }, []);
-
+  
   return (
-    <SafeAreaView style={styles.homeContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <ScrollView>
         {loading ? (
           <Text>Loading...</Text>
@@ -55,7 +62,7 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  homeContainer: {
+  mainContainer: {
     backgroundColor: '#181818',
     flex: 1,
   },
