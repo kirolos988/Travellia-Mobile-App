@@ -11,7 +11,11 @@ const Tab = createBottomTabNavigator();
 const Router = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator screenOptions={{
+      <Tab.Navigator tabBarOptions={{
+      activeTintColor: 'white',
+      activeBackgroundColor:'black',
+      inactiveBackgroundColor:'black',
+      inactiveTintColor: 'gray', 
         labelStyle: {
           fontSize: 12,
           fontWeight: 'bold',
@@ -23,11 +27,7 @@ const Router = () => {
         },
         headerShown:false,
       }}
-      tabBarOptions={{
-        activeTintColor: 'white',
-        inactiveTintColor: 'gray', 
-        active
-      }}>
+    >
         <Tab.Screen name="Home" component={Home} options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
