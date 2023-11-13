@@ -36,15 +36,8 @@ const RandomHotelsComponent = ({
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <Image
-          source={{ uri: image }}
-          style={{ width: '100%', height: 300, borderRadius: 7 }}
-        />
-        <Text
-          style={[styles.scale, styles.name]}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
+        <Image source={{ uri: image }} style={{ width: '100%', height: 300, borderRadius: 7 }} />
+        <Text style={[styles.scale, styles.name]} numberOfLines={1} ellipsizeMode="tail">
           {name}
         </Text>
         <View style={styles.ratingContainer}>

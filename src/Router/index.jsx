@@ -11,16 +11,19 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarStyle={{ borderTopColor: 'red' }}
-        screenOptions={{
-          activeTintColor: 'black',
+        tabBarOptions={{
+          activeTintColor: 'white',
+          activeBackgroundColor: 'black',
+          inactiveBackgroundColor: 'black',
+          inactiveTintColor: 'gray',
           labelStyle: {
             fontSize: 12,
             fontWeight: 'bold',
           },
           tabBarStyle: {
-            borderTopColor: '#84E9BD',
-            borderTopWidth: 2,
+            borderTopColor: '#222',
+            borderTopWidth: 1,
+            backgroundColor: '#222',
           },
           headerShown: false,
         }}

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Text,
+  View,
 } from 'react-native';
 import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
 import { hotelsAxios } from '../store/AxiosUrl';
