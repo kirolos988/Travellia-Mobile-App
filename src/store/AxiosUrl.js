@@ -17,7 +17,6 @@ export const cities = async () => {
 export const hotelsAxios = async () => {
   try {
     const response = await axiosInstance.get('/cities/hotels');
-    console.log(response.data.hotels);
     return response.data.hotels;
   } catch (error) {
     console.log('error');
@@ -37,7 +36,6 @@ export const restaurants = async () => {
 export const thingsToDo = async () => {
   try {
     const response = await axiosInstance.get('/cities/thingsToDo');
-    console.log(response.data.todos);
     return response.data.todos;
   } catch (error) {
     console.log('error');

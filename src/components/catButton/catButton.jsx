@@ -10,7 +10,12 @@ import React from 'react';
 
 const CatButton = () => {
   const [activeTab, setActiveTab] = useState(1);
-  // const [input, setInput] = useState('')
+  const [input, setInput] = useState('');
+  const [cateogry, setCategory] = useState('');
+  const handleInputChange = (text) => {
+    setInput(text);
+  };
+
   const placeholder = {
     1: "Enter hotel's name ...",
     2: "Enter restaurant's name ...",
@@ -24,7 +29,10 @@ const CatButton = () => {
       <View style={styles.ButtonView}>
         <TouchableOpacity
           style={styles.ButtonStyle}
-          onPress={() => setActiveTab(1)}
+          onPress={() => {
+            setActiveTab(1);
+            setCategory('/hotels');
+          }}
         >
           <Text style={styles.TextButton}>Hotels</Text>
         </TouchableOpacity>
@@ -46,6 +54,8 @@ const CatButton = () => {
           style={styles.SearchInput}
           placeholder={placeholder[activeTab]}
           placeholderTextColor={'grey'}
+          value={input}
+          onChangeText={handleInputChange}
         />
       </View>
     </View>
