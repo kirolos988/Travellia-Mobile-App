@@ -28,10 +28,6 @@ const Router = () => {
           },
           headerShown: false,
         }}
-        tabBarOptions={{
-          activeTintColor: 'white',
-          inactiveTintColor: 'gray',
-        }}
       >
         <Tab.Screen
           name="Home"
