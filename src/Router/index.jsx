@@ -12,10 +12,6 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator tabBarOptions={{
-        indicatorStyle: {
-          borderWidth: 2,
-          borderColor: 'red',
-        },
         activeTintColor: 'white',
         activeBackgroundColor:'black',
         inactiveBackgroundColor:'black',
