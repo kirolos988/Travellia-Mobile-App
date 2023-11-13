@@ -34,6 +34,7 @@ const Home = () => {
             showsHorizontalScrollIndicator={false}
             legacyImplementation={false}
             data={hotels}
+            snapToInterval={100}
             renderItem={({ item }) => (
               <SearchResultComponent
                 image={item.images[0]}

@@ -1,43 +1,24 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
-const SearchResultComponent = ({
-  image,
-  name,
-  rating,
-  locationName,
-  reviews,
-}) => {
+const SearchResultComponent = ({ image, name, rating, locationName, reviews }) => {
   const [coloredCircles, setColoredCircles] = useState([]);
+
   useEffect(() => {
     const fullCirclesCount = Math.floor(rating);
     const hasHalfCircle = rating % 1 !== 0;
 
-    const circles = new Array(5).fill(false).map((_, index) => {
+    const circles = new Array(5).fill(null).map((_, index) => {
       if (index < fullCirclesCount) {
-        return (
-          <View
-            key={index}
-            style={[styles.circle, styles.coloredCircle]}
-          ></View>
-        );
+        return <View key={index} style={[styles.circle, styles.coloredCircle]} />;
       } else if (index === fullCirclesCount && hasHalfCircle) {
         return (
-          <View
-            style={{
-              width: 15,
-              height: 15,
-              borderRadius: 7.5,
-              borderColor: '#00AA6C',
-              borderWidth: 1,
-              marginRight: 5,
-            }}
-          >
-            <View key={index} style={[styles.halfColoredCircle]}></View>
+          <View key={index} style={styles.circle}>
+            <View style={styles.halfColoredCircle} />
           </View>
         );
       } else {
-        return <View key={index} style={styles.circle}></View>;
+        return <View key={index} style={styles.circle} />;
       }
     });
 
@@ -47,19 +28,12 @@ const SearchResultComponent = ({
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <Image
-          source={{ uri: image }}
-          style={{ width: '100%', height: 300, borderRadius: 7 }}
-        />
-        <Text
-          style={[styles.scale, styles.name]}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
+        <Image source={{ uri: image }} style={{ width: '100%', height: 300, borderRadius: 7 }} />
+        <Text style={[styles.scale, styles.name]} numberOfLines={1} ellipsizeMode="tail">
           {name}
         </Text>
         <View style={styles.ratingContainer}>
-          <Text>{coloredCircles}</Text>
+          {coloredCircles}
           <Text style={styles.reviews}>{reviews} review</Text>
         </View>
         <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">
@@ -103,6 +77,7 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
     borderRadius: 7.5,
+    overflow: 'hidden',
     backgroundColor: 'transparent',
     marginRight: 5,
     borderColor: '#00AA6C',
@@ -112,12 +87,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#00AA6C',
   },
   halfColoredCircle: {
-    width: 7,
-    height: 13,
+    width: '50%',
+    height: '100%',
     borderBottomLeftRadius: 7.5,
     borderTopLeftRadius: 7.5,
     backgroundColor: '#00AA6C',
-    borderColor: '#00AA6C',
   },
   ratingContainer: {
     flexDirection: 'row',
