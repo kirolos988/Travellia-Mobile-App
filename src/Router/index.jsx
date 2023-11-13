@@ -26,7 +26,6 @@ const Router = () => {
       tabBarOptions={{
         activeTintColor: 'white',
         inactiveTintColor: 'gray', 
-        active
       }}>
         <Tab.Screen name="Home" component={Home} options={{
           tabBarIcon: ({ color, size }) => (
