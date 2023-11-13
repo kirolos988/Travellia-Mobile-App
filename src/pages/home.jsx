@@ -6,8 +6,9 @@ import {
   ScrollView,
   Text,
 } from 'react-native';
-import SearchResultComponent from '../components/SearchResult/SearchResultComponent';
+import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
 import { hotelsAxios } from '../store/AxiosUrl';
+import Header from '../components/Header/Header';
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
@@ -29,33 +30,33 @@ const Home = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <ScrollView>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : hotels.length > 0 ? (
-          <FlatList
-            horizontal
-            pagingEnabled={true}
-            showsHorizontalScrollIndicator={false}
-            legacyImplementation={false}
-            data={hotels}
-            renderItem={({ item }) => (
-              <SearchResultComponent
-                image={item.images[0]}
-                name={item.name}
-                rating={item.rating}
-                locationName={item.location.locationName}
-                reviews={item.reviews}
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        ) : (
-          <Text>No hotels available</Text>
-        )}
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.mainContainer}>
+      <Header />
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : hotels.length > 0 ? (
+        <FlatList
+          horizontal
+          snapToInterval={70}
+          pagingEnabled={true}
+          showsHorizontalScrollIndicator={false}
+          legacyImplementation={false}
+          data={hotels}
+          renderItem={({ item }) => (
+            <RandomHotelsComponent
+              image={item.images[0]}
+              name={item.name}
+              rating={item.rating}
+              locationName={item.location.locationName}
+              reviews={item.reviews}
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      ) : (
+        <Text>No hotels available</Text>
+      )}
+    </ScrollView>
   );
 };
 

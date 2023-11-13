@@ -16,5 +16,6 @@
 #To install bottom tabs navigator
     npm install @react-navigation/native
     npm install @react-navigation/bottom-tabs
+    npm install @react-navigation/native-stack
 #to install axios
     npm install axios

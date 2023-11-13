@@ -13,8 +13,8 @@ const Favourites = () => {
 export default Favourites;
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    backgroundColor: '#181818',
-    flex: 1,
-  },
+  // mainContainer: {
+  //   backgroundColor: '#181818',
+  //   flex: 1,
+  // },
 });
