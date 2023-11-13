@@ -19,7 +19,6 @@ const Router = () => {
           fontSize: 12,
           fontWeight: 'bold',
         },
-        
         tabBarStyle: {
           borderTopColor: '#84E9BD',
           borderTopWidth: 2,

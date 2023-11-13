@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import SearchResultComponent from '../components/SearchResult/SearchResultComponent';
 import { hotelsAxios } from '../store/AxiosUrl';
-import CatButton from '../components/catButton/catButton';
+
 const Home = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,9 +31,6 @@ const Home = () => {
   
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <View>
-         <CatButton/>
-      </View>
       <ScrollView>
         {loading ? (
           <Text>Loading...</Text>
