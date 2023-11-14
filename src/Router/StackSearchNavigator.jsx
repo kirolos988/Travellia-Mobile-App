@@ -15,7 +15,6 @@ const StackSearchNavigator = () => {
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: 'bold',
-          // Add other styles as needed
         },
       }}
     >
@@ -29,14 +28,15 @@ const StackSearchNavigator = () => {
         component={SearchedHotels}
         options={{
           title: 'Hotels and Places to Stay',
+          
         }}
       />
       <Stack.Screen
         name="SearchedRestaurants"
         component={SearchedRestaurants}
-        options={{
-          title: 'Restaurants',
-        }}
+        // options={{
+        //   title: 'Restaurants',
+        // }}
       />
       <Stack.Screen
         name="SearchedThingsToDo"

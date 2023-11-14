@@ -9,6 +9,7 @@ const SearchResultComponent = ({
   locationName,
   reviews,
   money,
+  address,
 }) => {
   const [coloredCircles, setColoredCircles] = useState([]);
 
@@ -62,13 +63,14 @@ const SearchResultComponent = ({
               {reviews} review
             </Text>
           </View>
-          <Text style={styles.scale}>{money}</Text>
+          {money && <Text style={styles.scale}>{money}</Text>}
           <Text
             style={[styles.scale, { alignItems: 'flex-start' }]}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {locationName}
+            {locationName &&  locationName }
+            {address && address }
           </Text>
           <TouchableOpacity style={styles.button} activeOpacity={0.8}>
             <Text style={styles.textButton}>View Deal</Text>
@@ -95,10 +97,9 @@ const styles = StyleSheet.create({
   },
   scale: {
     padding: 3,
-    marginVertical: 3,
+
     color: 'white',
     alignItems: 'center',
-    textAlign: 'left',
   },
   reviews: {
     color: 'white',
@@ -142,6 +143,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 23,
   },
-  textButton: { fontWeight: 700 },
+  textButton: { fontWeight: 'bold' },
 });
 export default SearchResultComponent;

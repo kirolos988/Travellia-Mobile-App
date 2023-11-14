@@ -4,7 +4,7 @@ import { hotelsAxios } from '../../store/AxiosUrl';
 import SearchResultComponent from '../../components/SearchResultComponent/SearchResultComponent';
 
 const Hotels = () => {
-  const [hotels, setHotels] = useState();
+  const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,10 +15,10 @@ const Hotels = () => {
         console.error('Error fetching hotels:', error);
       }
     };
-
+  
     fetchData();
   }, []);
-
+  
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
@@ -31,7 +31,7 @@ const Hotels = () => {
             rating={item.rating}
             locationName={item.location.locationName}
             reviews={item.reviews}
-            // website={item.website}
+            // address={item.}
             money={item.money}
           />
         )}

@@ -85,7 +85,8 @@ const CatButton = () => {
   const restaurantNames = restaurants.map((restaurant) =>
     restaurant.name.toLowerCase(),
   );
-
+  console.log(todoNames);
+  
   const searchValidate = () => {
     if (inputVal.trim() === '') {
       return;
@@ -110,14 +111,11 @@ const CatButton = () => {
       const matchedCityObject = cities.find((city) =>
         city.name.toLowerCase().includes(matchedCity.toLowerCase()),
       );
+      console.log(matchedCityObject);
       if (category === 'Hotels') {
         const hotelsInCity = hotels.filter(
           (hotel) => hotel.country_id === matchedCityObject.id,
         );
-
-
-        navigation.navigate('', { hotels: hotelsInCity });
-
         navigation.navigate('SearchedHotels', { hotels: hotelsInCity });
       } else if (category === 'Restaurants') {
         const restaurantsInCity = restaurants.filter(
@@ -131,7 +129,8 @@ const CatButton = () => {
         const todosInCity = todos.filter(
           (todo) => todo.country_id === matchedCityObject.id,
         );
-        // navigation.navigate('SearchedHotels', { todos: todosInCity });
+        console.log(todosInCity);
+        navigation.navigate('SearchedHotels', { todos: todosInCity });
       }
     }
   };
@@ -181,7 +180,10 @@ const CatButton = () => {
           onPress={() => setActiveTab(3)}
         >
           <Text
-            style={[styles.TextButton, activeTab === 3 ? styles.activeText : null]}
+            style={[
+              styles.TextButton,
+              activeTab === 3 ? styles.activeText : null,
+            ]}
           >
             Things To Do
           </Text>
@@ -254,7 +256,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     fontSize: 17,
     color: '#fff',
-    outlineWidth: 0,
+    // outlineWidth: 0,
   },
   active: {
     backgroundColor: '#85E8BF',
