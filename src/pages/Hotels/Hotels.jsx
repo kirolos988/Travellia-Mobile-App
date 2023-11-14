@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import { hotelsAxios } from '../../store/AxiosUrl';
 import SearchResultComponent from '../../components/SearchResultComponent/SearchResultComponent';
 

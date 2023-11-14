@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import CatButton from '../components/catButton/catButton';
+import CatButton from '../components/catButton/CatButton';
 
 const Search = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
-       <View>
-         <CatButton/>
+      <View>
+        <CatButton />
       </View>
     </SafeAreaView>
   );
