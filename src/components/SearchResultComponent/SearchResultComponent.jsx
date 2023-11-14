@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   coloredCircle: {
-    backgroundColor: '#85E8B5',
+    backgroundColor: '#00AA6C',
   },
   halfColoredCircle: {
     width: '50%',

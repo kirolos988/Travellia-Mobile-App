@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import { hotelsAxios } from '../../store/AxiosUrl';
 import SearchResultComponent from '../../components/SearchResultComponent/SearchResultComponent';
 
@@ -31,7 +31,7 @@ const Hotels = () => {
             rating={item.rating}
             locationName={item.location.locationName}
             reviews={item.reviews}
-            website={item.website}
+            // website={item.website}
             money={item.money}
           />
         )}
@@ -40,4 +40,4 @@ const Hotels = () => {
   );
 };
 
-export default Hotels;
+export default Hotels;

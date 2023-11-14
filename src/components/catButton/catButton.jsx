@@ -116,7 +116,7 @@ const CatButton = () => {
           (hotel) => hotel.country_id === matchedCityObject.id,
         );
 
-        navigation.navigate('Hotels', { hotels: hotelsInCity });
+        navigation.navigate('', { hotels: hotelsInCity });
       }
     }
   };
@@ -136,22 +136,40 @@ const CatButton = () => {
       </View>
       <View style={styles.ButtonView}>
         <TouchableOpacity
-          style={styles.ButtonStyle}
+          style={[styles.ButtonStyle, activeTab === 1 ? styles.active : null]}
           onPress={() => setActiveTab(1)}
         >
-          <Text style={styles.TextButton}>Hotels</Text>
+          <Text
+            style={[
+              styles.TextButton,
+              activeTab === 1 ? styles.activeText : null,
+            ]}
+          >
+            Hotels
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.ButtonStyle}
+          style={[styles.ButtonStyle, activeTab === 2 ? styles.active : null]}
           onPress={() => setActiveTab(2)}
         >
-          <Text style={styles.TextButton}>Restaurants</Text>
+          <Text
+            style={[
+              styles.TextButton,
+              activeTab === 2 ? styles.activeText : null,
+            ]}
+          >
+            Restaurants
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.ButtonStyle}
+          style={[styles.ButtonStyle, activeTab === 3 ? styles.active : null]}
           onPress={() => setActiveTab(3)}
         >
-          <Text style={styles.TextButton}>Things To Do</Text>
+          <Text
+            style={[styles.TextButton, activeTab === 3 ? styles.activeText : null]}
+          >
+            Things To Do
+          </Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -222,6 +240,13 @@ const styles = StyleSheet.create({
     fontSize: 17,
     color: '#fff',
     outlineWidth: 0,
+  },
+  active: {
+    backgroundColor: '#85E8BF',
+  },
+  activeText: {
+    color: 'black',
+    fontWeight: '700',
   },
 });
 

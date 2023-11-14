@@ -88,11 +88,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: 'transparent',
     marginRight: 5,
-    borderColor: '#85E8B5',
+    borderColor: '#00AA6C',
     borderWidth: 1,
   },
   coloredCircle: {
-    backgroundColor: '#85E8B5',
+    backgroundColor: '#00AA6C',
   },
   halfColoredCircle: {
     width: '50%',

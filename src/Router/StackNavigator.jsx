@@ -14,7 +14,7 @@ const StackNavigator = () => {
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: 'bold',
-          // Add other styles as needed
+
         },
       }}
     >
