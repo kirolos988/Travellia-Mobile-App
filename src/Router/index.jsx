@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Search from '../pages/Search';
-import Favourites from '../pages/Favourites';
+import Favourites from '../pages/favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
 const Tab = createBottomTabNavigator();
