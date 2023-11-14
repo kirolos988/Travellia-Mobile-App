@@ -6,7 +6,7 @@ import CatButton from '../components/catButton/CatButton';
 const Search = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <View>
+      <View style={{ flex: 1 }}>
         <CatButton />
       </View>
     </SafeAreaView>
