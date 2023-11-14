@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-n
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Rating from '../Rating/Rating';
 
 const SearchResultComponent = ({
   image,
@@ -11,33 +12,32 @@ const SearchResultComponent = ({
   reviews,
   money,
   address,
-  id,
   item,
 }) => {
-  const [coloredCircles, setColoredCircles] = useState([]);
+  // const [coloredCircles, setColoredCircles] = useState([]);
 
-  useEffect(() => {
-    const fullCirclesCount = Math.floor(rating);
-    const hasHalfCircle = rating % 1 !== 0;
+  // useEffect(() => {
+  //   const fullCirclesCount = Math.floor(rating);
+  //   const hasHalfCircle = rating % 1 !== 0;
 
-    const circles = new Array(5).fill(null).map((_, index) => {
-      if (index < fullCirclesCount) {
-        return (
-          <View key={index} style={[styles.circle, styles.coloredCircle]} />
-        );
-      } else if (index === fullCirclesCount && hasHalfCircle) {
-        return (
-          <View key={index} style={styles.circle}>
-            <View style={styles.halfColoredCircle} />
-          </View>
-        );
-      } else {
-        return <View key={index} style={styles.circle} />;
-      }
-    });
+  //   const circles = new Array(5).fill(null).map((_, index) => {
+  //     if (index < fullCirclesCount) {
+  //       return (
+  //         <View key={index} style={[styles.circle, styles.coloredCircle]} />
+  //       );
+  //     } else if (index === fullCirclesCount && hasHalfCircle) {
+  //       return (
+  //         <View key={index} style={styles.circle}>
+  //           <View style={styles.halfColoredCircle} />
+  //         </View>
+  //       );
+  //     } else {
+  //       return <View key={index} style={styles.circle} />;
+  //     }
+  //   });
 
-    setColoredCircles(circles);
-  }, [rating]);
+  //   setColoredCircles(circles);
+  // }, [rating]);
   const navigation = useNavigation();
   const handleNavigation = () => {
     navigation.navigate('SinglePage', { data: item });
@@ -64,7 +64,7 @@ const SearchResultComponent = ({
             {name}
           </Text>
           <View style={styles.ratingContainer}>
-            {coloredCircles}
+            {<Rating rating={rating}/>}
             <Text style={[styles.reviews, { justifyContent: 'flex-start' }]}>
               {reviews} review
             </Text>

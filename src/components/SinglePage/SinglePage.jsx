@@ -10,6 +10,7 @@ import {
   Linking,
   TouchableOpacity,
 } from 'react-native';
+import Rating from '../Rating/Rating';
 
 const SinglePage = () => {
   const categoryData = useRoute().params;
@@ -41,42 +42,10 @@ const SinglePage = () => {
 
   const handleScroll = (event) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
-    // console.log({ scrollPosition });
     const index = scrollPosition / screenWidth;
-    // console.log({ index });
     setActiveIndex(index);
   };
-  // const renderDotIndicators = () => {
-  //   return item.data.images.map((dot, index) => {
-  //     if (activeIndex === index) {
-  //       return (
-  //         <View
-  //           key={index}
-  //           style={{
-  //             backgroundColor: 'yellow',
-  //             width: 10,
-  //             height: 10,
-  //             borderRadius: 5,
-  //             marginHorizontal: 6,
-  //           }}
-  //         ></View>
-  //       );
-  //     } else {
-  //       return (
-  //         <View
-  //           key={index}
-  //           style={{
-  //             backgroundColor: 'white',
-  //             width: 10,
-  //             height: 10,
-  //             borderRadius: 5,
-  //             marginHorizontal: 6,
-  //           }}
-  //         ></View>
-  //       );
-  //     }
-  //   });
-  // };
+
   return (
     <View style={{ backgroundColor: '#181818', flex: 1 }}>
       <FlatList
@@ -94,18 +63,9 @@ const SinglePage = () => {
         onScroll={handleScroll}
         pagingEnabled={true}
       ></FlatList>
-      {/* <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginTop: 10,
-        }}
-      >
-        {renderDotIndicators()}
-      </View> */}
       <View style={{ flex: 1 }}>
         <Text style={styles.name}>{name}</Text>
-        <Text> {rating}</Text>
+        <View style={styles.ratingContainer}>{<Rating rating={rating} />}</View>
 
         <View style={{ flexDirection: 'row' }}>
           <Text
@@ -139,12 +99,16 @@ const SinglePage = () => {
 export default SinglePage;
 const styles = StyleSheet.create({
   name: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
     paddingVertical: 10,
   },
-
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 0,
+  },
   // fixedButton: {
   //     position: 'absolute',
   //     bottom: 0,
