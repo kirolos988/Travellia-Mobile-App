@@ -127,7 +127,7 @@ const CatButton = () => {
         const todosInCity = todos.filter(
           (todo) => todo.country_id === matchedCityObject.id,
         );
-        navigation.navigate('SearchedHotels', { todos: todosInCity });
+        // navigation.navigate('SearchedHotels', { todos: todosInCity });
       }
     }
   };
