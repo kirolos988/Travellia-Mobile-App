@@ -1,6 +1,7 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchResultComponent = ({
   image,
@@ -10,6 +11,8 @@ const SearchResultComponent = ({
   reviews,
   money,
   address,
+  id,
+  item,
 }) => {
   const [coloredCircles, setColoredCircles] = useState([]);
 
@@ -35,9 +38,12 @@ const SearchResultComponent = ({
 
     setColoredCircles(circles);
   }, [rating]);
-
+  const navigation = useNavigation();
+  const handleNavigation = () => {
+    navigation.navigate('SinglePage', { data: item });
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleNavigation}>
       <View style={styles.itemContainer}>
         <Image source={{ uri: image }} style={{ width: '100%', height: 300 }} />
         <View
@@ -69,15 +75,15 @@ const SearchResultComponent = ({
             numberOfLines={1}
             ellipsizeMode="tail"
           >
-            {locationName &&  locationName }
-            {address && address }
+            {locationName && locationName}
+            {address && address}
           </Text>
           <TouchableOpacity style={styles.button} activeOpacity={0.8}>
             <Text style={styles.textButton}>View Deal</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({

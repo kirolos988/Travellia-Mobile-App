@@ -8,25 +8,26 @@ const SearchedHotels = () => {
   const hotelsInCity = useRoute().params;
   console.log(hotelsInCity);
   return (
-      <FlatList
-        data={
-          hotelsInCity.hotels || hotelsInCity.restaurants || hotelsInCity.todos
-        }
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <SearchResultComponent
-            image={item.images[0]}
-            name={item.name}
-            rating={item.rating}
-            locationName={item.location?.locationName}
-            address={item.address}
-            reviews={item.reviews}
-            website={item.website}
-            money={item.money}
-          />
-        )}
-      />
-
+    <FlatList
+      data={
+        hotelsInCity.hotels || hotelsInCity.restaurants || hotelsInCity.todos
+      }
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <SearchResultComponent
+          item={item}
+          id={item.id}
+          image={item.images[0]}
+          name={item.name}
+          rating={item.rating}
+          locationName={item.location?.locationName}
+          address={item.address}
+          reviews={item.reviews}
+          website={item.website}
+          money={item.money}
+        />
+      )}
+    />
   );
 };
 

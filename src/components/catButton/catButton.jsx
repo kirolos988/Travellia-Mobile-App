@@ -256,7 +256,6 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     fontSize: 17,
     color: '#fff',
-    // outlineWidth: 0,
   },
   active: {
     backgroundColor: '#85E8BF',
