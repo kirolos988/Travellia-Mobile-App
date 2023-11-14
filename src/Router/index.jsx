@@ -2,7 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import Search from '../pages/Search';
 import Favourites from '../pages/Favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
@@ -12,21 +11,19 @@ const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: 'white',
-          activeBackgroundColor: 'black',
-          inactiveBackgroundColor: 'black',
-          inactiveTintColor: 'gray',
+        screenOptions={{
+          inactiveTintColor: 'gray', 
+          tabBarStyle: {
+            backgroundColor: '#222',
+            borderTopColor: '#222',
+            borderTopWidth: 1,
+          },
           labelStyle: {
             fontSize: 12,
             fontWeight: 'bold',
           },
-          tabBarStyle: {
-            borderTopColor: '#222',
-            borderTopWidth: 1,
-            backgroundColor: '#222',
-          },
           headerShown: false,
+          tabBarActiveTintColor: 'white'
         }}
       >
         <Tab.Screen
@@ -43,6 +40,7 @@ const Router = () => {
             tabBarLabel: 'Explore',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
+            tabBarActiveTintColor: 'white'
           }}
         />
         <Tab.Screen
@@ -59,6 +57,7 @@ const Router = () => {
             tabBarLabel: 'Search',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
+            tabBarActiveTintColor: 'white'
           }}
         />
         <Tab.Screen
@@ -75,6 +74,7 @@ const Router = () => {
             tabBarLabel: 'Favourites',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
+            tabBarActiveTintColor: 'white'
           }}
         />
       </Tab.Navigator>
