@@ -93,7 +93,6 @@ const CatButton = () => {
     const matchedCity = cityNames.find((city) =>
       city.includes(inputVal.toLowerCase()),
     );
-
     console.log(matchedCity);
 
     const matchedHotels = hotelNames.filter((hotel) =>
@@ -116,7 +115,23 @@ const CatButton = () => {
           (hotel) => hotel.country_id === matchedCityObject.id,
         );
 
+
         navigation.navigate('', { hotels: hotelsInCity });
+
+        navigation.navigate('SearchedHotels', { hotels: hotelsInCity });
+      } else if (category === 'Restaurants') {
+        const restaurantsInCity = restaurants.filter(
+          (restaurant) => restaurant.country_id === matchedCityObject.id,
+        );
+        console.log(restaurantsInCity);
+        navigation.navigate('SearchedHotels', {
+          restaurants: restaurantsInCity,
+        });
+      } else if (category === 'ThingsToDo') {
+        const todosInCity = todos.filter(
+          (todo) => todo.country_id === matchedCityObject.id,
+        );
+        // navigation.navigate('SearchedHotels', { todos: todosInCity });
       }
     }
   };
@@ -180,7 +195,7 @@ const CatButton = () => {
           value={inputVal}
           onChangeText={handleInputChange}
           returnKeyType="search"
-          // onSubmitEditing={searchValidate}
+          onSubmitEditing={searchValidate}
         />
         <TouchableOpacity onPress={searchValidate}>
           <Text style={{ color: 'white' }}>Search</Text>

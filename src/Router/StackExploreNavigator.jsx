@@ -6,7 +6,7 @@ import ThingsToDo from '../pages/ThingsToDo/ThingsToDo';
 import Home from '../pages/Home';
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
+const StackExploreNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -48,4 +48,4 @@ const StackNavigator = () => {
   );
 };
 
-export default StackNavigator;
+export default StackExploreNavigator;

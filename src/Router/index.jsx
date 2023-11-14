@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Search from '../pages/Search';
 import Favourites from '../pages/Favourites';
-import StackNavigator from './StackNavigator';
+import StackExploreNavigator from './StackExploreNavigator';
+import StackSearchNavigator from './StackSearchNavigator';
 const Tab = createBottomTabNavigator();
 
 const Router = () => {
@@ -29,8 +30,8 @@ const Router = () => {
         }}
       >
         <Tab.Screen
-          name="explore"
-          component={StackNavigator}
+          name="exploreStack"
+          component={StackExploreNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
@@ -45,8 +46,8 @@ const Router = () => {
           }}
         />
         <Tab.Screen
-          name="Search"
-          component={Search}
+          name="SearchStack"
+          component={StackSearchNavigator}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
