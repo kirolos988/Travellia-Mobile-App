@@ -5,15 +5,123 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
+import {
+  citiesAxios,
+  hotelsAxios,
+  restaurantsAxios,
+  todoAxios,
+} from '../../store/AxiosUrl';
+import { useNavigation } from '@react-navigation/native';
 
 const CatButton = () => {
   const [activeTab, setActiveTab] = useState(1);
-  const [input, setInput] = useState('');
-  const [cateogry, setCategory] = useState('');
+  const [inputVal, setInputVal] = useState('');
+  const [category, setCategory] = useState('');
+  const [cities, setCities] = useState([]);
+  const [hotels, setHotels] = useState([]);
+  const [todos, setTodos] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    switch (activeTab) {
+      case 1:
+        setCategory('Hotels');
+        break;
+      case 2:
+        setCategory('Restaurants');
+        break;
+      case 3:
+        setCategory('ThingsToDo');
+        break;
+      default:
+        setCategory('Hotels');
+        break;
+    }
+  }, [activeTab]);
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const citiesData = await citiesAxios();
+        setCities(citiesData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchhotels = async () => {
+      try {
+        const hotelsData = await hotelsAxios();
+        setHotels(hotelsData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchRestaurants = async () => {
+      try {
+        const restaurantsData = await restaurantsAxios();
+        setRestaurants(restaurantsData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchTodos = async () => {
+      try {
+        const todosData = await todoAxios();
+        setTodos(todosData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchCities();
+    fetchTodos();
+    fetchhotels();
+    fetchRestaurants();
+  }, []);
+  const cityNames = cities.map((city) => city.name.toLowerCase());
+  const hotelNames = hotels.map((hotel) => hotel.name.toLowerCase());
+  const todoNames = todos.map((todo) => todo.name.toLowerCase());
+  const restaurantNames = restaurants.map((restaurant) =>
+    restaurant.name.toLowerCase(),
+  );
+
+  const searchValidate = () => {
+    if (inputVal.trim() === '') {
+      return;
+    }
+    const matchedCity = cityNames.find((city) =>
+      city.includes(inputVal.toLowerCase()),
+    );
+
+    console.log(matchedCity);
+
+    const matchedHotels = hotelNames.filter((hotel) =>
+      hotel.includes(inputVal.toLowerCase()),
+    );
+
+    const matchedRestaurants = restaurantNames.filter((restaurant) =>
+      restaurant.includes(inputVal.toLowerCase()),
+    );
+    const matchedTodos = todoNames.filter((todo) =>
+      todo.includes(inputVal.toLowerCase()),
+    );
+
+    if (matchedCity) {
+      const matchedCityObject = cities.find((city) =>
+        city.name.toLowerCase().includes(matchedCity.toLowerCase()),
+      );
+      if (category === 'Hotels') {
+        const hotelsInCity = hotels.filter(
+          (hotel) => hotel.country_id === matchedCityObject.id,
+        );
+
+        navigation.navigate('Hotels', { hotels: hotelsInCity });
+      }
+    }
+  };
   const handleInputChange = (text) => {
-    setInput(text);
+    setInputVal(text);
   };
 
   const placeholder = {
@@ -29,10 +137,7 @@ const CatButton = () => {
       <View style={styles.ButtonView}>
         <TouchableOpacity
           style={styles.ButtonStyle}
-          onPress={() => {
-            setActiveTab(1);
-            setCategory('/hotels');
-          }}
+          onPress={() => setActiveTab(1)}
         >
           <Text style={styles.TextButton}>Hotels</Text>
         </TouchableOpacity>
@@ -54,9 +159,14 @@ const CatButton = () => {
           style={styles.SearchInput}
           placeholder={placeholder[activeTab]}
           placeholderTextColor={'grey'}
-          value={input}
+          value={inputVal}
           onChangeText={handleInputChange}
+          returnKeyType="search"
+          // onSubmitEditing={searchValidate}
         />
+        <TouchableOpacity onPress={searchValidate}>
+          <Text style={{ color: 'white' }}>Search</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

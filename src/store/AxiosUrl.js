@@ -4,14 +4,13 @@ const axiosInstance = axios.create({
   baseURL: 'https://travelya.onrender.com',
 });
 
-export const cities = async () => {
+export const citiesAxios = async () => {
   try {
     const response = await axiosInstance.get('/cities');
-    // console.log(response.data.cities);
     return response.data.cities;
   } catch (error) {
     console.log('error');
-    // throw error;
+
   }
 };
 export const hotelsAxios = async () => {
