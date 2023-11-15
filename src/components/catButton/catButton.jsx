@@ -86,7 +86,7 @@ const CatButton = () => {
     restaurant.name.toLowerCase(),
   );
   console.log(todoNames);
-  
+
   const searchValidate = () => {
     if (inputVal.trim() === '') {
       return;
@@ -210,6 +210,7 @@ const CatButton = () => {
 const styles = StyleSheet.create({
   GeneralView: {
     paddingVertical: 15,
+    paddingHorizontal: 10,
   },
   SearchView: {
     padding: 10,
@@ -225,13 +226,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     display: 'flex',
     flexDirection: 'row',
-    margin: 20,
+    marginVertical: 10,
   },
   ButtonStyle: {
     borderColor: '#fff',
     borderRadius: 40,
     borderWidth: 2,
-    margin: 7,
+    margin: 3,
     padding: 0,
     width: '32%',
     height: 50,
@@ -240,13 +241,13 @@ const styles = StyleSheet.create({
   TextButton: {
     color: '#fff',
     margin: 0,
-    padding: 5,
+    paddingHorizontal: 3,
     textAlign: 'center',
     fontSize: 15,
   },
   SearchInput: {
     alignSelf: 'center',
-    width: '95%',
+    width: '100%',
     borderWidth: 2,
     borderColor: '#fff',
     padding: 10,
