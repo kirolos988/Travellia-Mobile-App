@@ -1,6 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native';
 import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
 

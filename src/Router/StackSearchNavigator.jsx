@@ -32,7 +32,13 @@ const StackSearchNavigator = () => {
       <Stack.Screen
         name="SinglePage"
         component={SinglePage}
-        options={{ title: 'single page' }}
+        options={{
+          title: 'single page',
+          headerTintColor:"white",
+          headerStyle: {
+            backgroundColor: '#181818',
+          },
+        }}
       />
     </Stack.Navigator>
   );

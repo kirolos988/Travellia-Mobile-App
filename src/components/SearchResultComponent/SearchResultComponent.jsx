@@ -35,7 +35,7 @@ const SearchResultComponent = ({
         <View
           style={{
             paddingTop: 10,
-            paddingHorizontal: 20,
+            paddingHorizontal: 12,
           }}
         >
           <Text
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#181818',
     paddingVertical: 30,
-    paddingHorizontal: 7,
+    paddingHorizontal: 0,
     color: 'white',
     borderBottomColor: '#5A5A5A',
   },

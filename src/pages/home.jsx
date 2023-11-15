@@ -10,6 +10,7 @@ import {
 import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
 import { hotelsAxios } from '../store/AxiosUrl';
 import Header from '../components/Header/Header';
+import Addvertise from '../components/adds/Addvertise';
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
@@ -57,6 +58,7 @@ const Home = () => {
       ) : (
         <Text>No hotels available</Text>
       )}
+      <Addvertise />
     </ScrollView>
   );
 };

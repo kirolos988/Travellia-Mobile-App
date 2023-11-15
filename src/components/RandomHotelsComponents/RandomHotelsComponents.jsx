@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     padding: 3,
     marginVertical: 3,
     color: 'white',
+    marginHorizontal:5
   },
   reviews: {
     color: 'white',
@@ -104,7 +105,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 0,
+    paddingHorizontal: 7,
   },
 });
 
