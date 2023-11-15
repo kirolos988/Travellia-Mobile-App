@@ -1,5 +1,5 @@
 import { useRoute } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native';
 import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
@@ -7,6 +7,9 @@ import SearchResultComponent from '../components/SearchResultComponent/SearchRes
 const SearchedHotels = () => {
   const hotelsInCity = useRoute().params;
   console.log(hotelsInCity);
+  // useEffect(()=>{
+
+  // },[])
   return (
     <FlatList
       data={

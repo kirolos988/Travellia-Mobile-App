@@ -4,8 +4,7 @@ import SearchedHotels from '../pages/SearchedHotels';
 import SearchedRestaurants from '../pages/SearchedRestaurants';
 import SearchedThingsToDo from '../pages/SearchedThingsToDo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SinglePage from '../components/SinglePage/SinglePage';
-
+import SinglePage from '../pages/SinglePage/SinglePage';
 const Stack = createNativeStackNavigator();
 
 const StackSearchNavigator = () => {
@@ -42,7 +41,11 @@ const StackSearchNavigator = () => {
           title: 'Things To Do',
         }}
       />
-      <Stack.Screen name="SinglePage" component={SinglePage} options={{title:"single page"}}/>
+      <Stack.Screen
+        name="SinglePage"
+        component={SinglePage}
+        options={{ title: 'single page' }}
+      />
     </Stack.Navigator>
   );
 };

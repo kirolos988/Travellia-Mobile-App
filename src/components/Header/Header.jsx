@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 15,
+    paddingLeft: 5,
     flex: 1,
     backgroundColor: 'white',
     borderRadius: 25,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     height: 59,
     borderRadius: 25,
-    overflow: 'hidden', // Ensures the borderRadius is applied even if content doesn't fill the box
+    overflow: 'hidden',
   },
   lastButton: {
     marginHorizontal: 5,
@@ -107,10 +107,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'black',
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: '700',
     paddingVertical: 10,
-    textAlign: 'center',
   },
 });
 
