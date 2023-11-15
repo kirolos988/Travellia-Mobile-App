@@ -7,33 +7,47 @@ import {
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import {
-  citiesAxios,
-  hotelsAxios,
-  restaurantsAxios,
-  todoAxios,
-} from '../../store/AxiosUrl';
+import { Axios } from '../../store/AxiosUrl';
 import { useNavigation } from '@react-navigation/native';
 
 const CatButton = () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState('Hotels');
   const [inputVal, setInputVal] = useState('');
   const [category, setCategory] = useState('');
-  const [cities, setCities] = useState([]);
-  const [hotels, setHotels] = useState([]);
-  const [todos, setTodos] = useState([]);
-  const [restaurants, setRestaurants] = useState([]);
   const navigation = useNavigation();
+  const [data, setData] = useState([]);
+
+  function capitalizeFirstLetter(inputString) {
+    return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+  }
+  const fetchData = async () => {
+    try {
+      const data = await Axios(activeTab, inputVal);
+      console.log(data);
+      setData(data);
+      if (data.length > 0) {
+        navigation.navigate('SearchedHotels', {
+          category: data,
+          title: `"${inputVal}" ${activeTab} `,
+          specifiedTitle: `${inputVal}`,
+        });
+      } else {
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     switch (activeTab) {
-      case 1:
+      case 'Hotels':
         setCategory('Hotels');
         break;
-      case 2:
+      case 'Restaurants':
         setCategory('Restaurants');
         break;
-      case 3:
+      case 'ThingsToDo':
         setCategory('ThingsToDo');
         break;
       default:
@@ -41,107 +55,21 @@ const CatButton = () => {
         break;
     }
   }, [activeTab]);
-  useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        const citiesData = await citiesAxios();
-        setCities(citiesData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchhotels = async () => {
-      try {
-        const hotelsData = await hotelsAxios();
-        setHotels(hotelsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchRestaurants = async () => {
-      try {
-        const restaurantsData = await restaurantsAxios();
-        setRestaurants(restaurantsData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    const fetchTodos = async () => {
-      try {
-        const todosData = await todoAxios();
-        setTodos(todosData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchCities();
-    fetchTodos();
-    fetchhotels();
-    fetchRestaurants();
-  }, []);
-  const cityNames = cities.map((city) => city.name.toLowerCase());
-  const hotelNames = hotels.map((hotel) => hotel.name.toLowerCase());
-  const todoNames = todos.map((todo) => todo.name.toLowerCase());
-  const restaurantNames = restaurants.map((restaurant) =>
-    restaurant.name.toLowerCase(),
-  );
-  console.log(todoNames);
 
   const searchValidate = () => {
-    if (inputVal.trim() === '') {
-      return;
-    }
-    const matchedCity = cityNames.find((city) =>
-      city.includes(inputVal.toLowerCase()),
-    );
-    console.log(matchedCity);
-
-    const matchedHotels = hotelNames.filter((hotel) =>
-      hotel.includes(inputVal.toLowerCase()),
-    );
-
-    const matchedRestaurants = restaurantNames.filter((restaurant) =>
-      restaurant.includes(inputVal.toLowerCase()),
-    );
-    const matchedTodos = todoNames.filter((todo) =>
-      todo.includes(inputVal.toLowerCase()),
-    );
-
-    if (matchedCity) {
-      const matchedCityObject = cities.find((city) =>
-        city.name.toLowerCase().includes(matchedCity.toLowerCase()),
-      );
-      console.log(matchedCityObject);
-      if (category === 'Hotels') {
-        const hotelsInCity = hotels.filter(
-          (hotel) => hotel.country_id === matchedCityObject.id,
-        );
-        navigation.navigate('SearchedHotels', { hotels: hotelsInCity });
-      } else if (category === 'Restaurants') {
-        const restaurantsInCity = restaurants.filter(
-          (restaurant) => restaurant.country_id === matchedCityObject.id,
-        );
-        console.log(restaurantsInCity);
-        navigation.navigate('SearchedHotels', {
-          restaurants: restaurantsInCity,
-        });
-      } else if (category === 'ThingsToDo') {
-        const todosInCity = todos.filter(
-          (todo) => todo.country_id === matchedCityObject.id,
-        );
-        console.log(todosInCity);
-        navigation.navigate('SearchedHotels', { todos: todosInCity });
-      }
+    if (inputVal.trim() !== '') {
+      fetchData();
     }
   };
+
   const handleInputChange = (text) => {
-    setInputVal(text);
+    setInputVal(capitalizeFirstLetter(text));
   };
 
   const placeholder = {
-    1: "Enter hotel's name ...",
-    2: "Enter restaurant's name ...",
-    3: 'Enter the thing you wish to do ...',
+    Hotels: "Enter hotel's name ...",
+    Restaurants: "Enter restaurant's name ...",
+    ThingsToDo: 'Enter the thing you wish to do ...',
   };
   return (
     <View style={styles.GeneralView}>
@@ -150,39 +78,48 @@ const CatButton = () => {
       </View>
       <View style={styles.ButtonView}>
         <TouchableOpacity
-          style={[styles.ButtonStyle, activeTab === 1 ? styles.active : null]}
-          onPress={() => setActiveTab(1)}
+          style={[
+            styles.ButtonStyle,
+            activeTab === 'Hotels' ? styles.active : null,
+          ]}
+          onPress={() => setActiveTab('Hotels')}
         >
           <Text
             style={[
               styles.TextButton,
-              activeTab === 1 ? styles.activeText : null,
+              activeTab === 'Hotels' ? styles.activeText : null,
             ]}
           >
             Hotels
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.ButtonStyle, activeTab === 2 ? styles.active : null]}
-          onPress={() => setActiveTab(2)}
+          style={[
+            styles.ButtonStyle,
+            activeTab === 'Restaurants' ? styles.active : null,
+          ]}
+          onPress={() => setActiveTab('Restaurants')}
         >
           <Text
             style={[
               styles.TextButton,
-              activeTab === 2 ? styles.activeText : null,
+              activeTab === 'Restaurants' ? styles.activeText : null,
             ]}
           >
             Restaurants
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.ButtonStyle, activeTab === 3 ? styles.active : null]}
-          onPress={() => setActiveTab(3)}
+          style={[
+            styles.ButtonStyle,
+            activeTab === 'ThingsToDo' ? styles.active : null,
+          ]}
+          onPress={() => setActiveTab('ThingsToDo')}
         >
           <Text
             style={[
               styles.TextButton,
-              activeTab === 3 ? styles.activeText : null,
+              activeTab === 'ThingsToDo' ? styles.activeText : null,
             ]}
           >
             Things To Do

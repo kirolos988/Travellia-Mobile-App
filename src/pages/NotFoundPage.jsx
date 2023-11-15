@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const SearchedThingsToDo = () => {
+const NotFoundPage = () => {
   return (
     <View>
-      <Text>SearchedThingsToDo</Text>
+      <Text>NotFoundPage</Text>
     </View>
   );
 };
 
-export default SearchedThingsToDo;
+export default NotFoundPage;
