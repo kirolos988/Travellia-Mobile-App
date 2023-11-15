@@ -43,13 +43,13 @@ const SearchResultComponent = ({
     navigation.navigate('SinglePage', { data: item });
   };
   return (
-    <TouchableOpacity style={styles.container} onPress={handleNavigation}>
+    <TouchableOpacity style={styles.container} onPress={handleNavigation} activeOpacity={0.9}>
       <View style={styles.itemContainer}>
         <Image source={{ uri: image }} style={{ width: '100%', height: 300 }} />
         <View
           style={{
             paddingTop: 10,
-            paddingHorizontal: 20,
+            paddingHorizontal: 12,
           }}
         >
           <Text
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#181818',
     paddingVertical: 30,
-    paddingHorizontal: 7,
+    paddingHorizontal: 0,
     color: 'white',
   },
   itemContainer: {

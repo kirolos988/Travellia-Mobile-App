@@ -42,7 +42,17 @@ const StackSearchNavigator = () => {
           title: 'Things To Do',
         }}
       />
-      <Stack.Screen name="SinglePage" component={SinglePage} options={{title:"single page"}}/>
+      <Stack.Screen
+        name="SinglePage"
+        component={SinglePage}
+        options={{
+          title: 'single page',
+          headerTintColor:"white",
+          headerStyle: {
+            backgroundColor: '#181818',
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
