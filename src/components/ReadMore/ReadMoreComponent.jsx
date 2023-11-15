@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-const ReadMore = ({ text, numberOfLines = 3 }) => {
+const ReadMoreComponent = ({ text, numberOfLines = 3 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleReadMoreToggle = () => {
@@ -58,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReadMore;
+export default ReadMoreComponent;

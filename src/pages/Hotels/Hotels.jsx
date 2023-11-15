@@ -39,4 +39,4 @@ const Hotels = () => {
   );
 };
 
-export default Hotels;
+export default Hotels;
