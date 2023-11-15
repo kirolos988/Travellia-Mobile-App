@@ -31,7 +31,6 @@ const Hotels = () => {
             rating={item.rating}
             locationName={item.location.locationName}
             reviews={item.reviews}
-            // address={item.}
             money={item.money}
           />
         )}
