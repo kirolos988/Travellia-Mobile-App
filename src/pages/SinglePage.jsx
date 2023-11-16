@@ -13,11 +13,11 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import Rating from '../../components/Rating/Rating';
+import Rating from '../components/Rating/Rating';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import ReadMoreComponent from '../../components/ReadMore/ReadMoreComponent';
+import ReadMoreComponent from '../components/ReadMore/ReadMoreComponent';
 import WebView from 'react-native-webview';
 import { StatusBar, Platform } from 'react-native';
 
