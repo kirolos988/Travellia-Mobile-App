@@ -6,16 +6,26 @@ import {
   ScrollView,
   Text,
   View,
+  Platform,
 } from 'react-native';
 import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
 import { hotelsAxios } from '../store/AxiosUrl';
 import Header from '../components/Header/Header';
 import Addvertise from '../components/adds/Addvertise';
+import { StatusBar } from 'react-native';
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#181818');
+      StatusBar.setBarStyle('light-content');
+    } else {
+      return;
+    }
+  }, []);
   useEffect(() => {
     const fetchHotels = async () => {
       try {
@@ -75,13 +85,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#181818',
     flex: 1,
   },
-  heading:{
-    color:"white",
-    fontWeight:"700",
-    fontSize:25,
-    marginTop:40,
-    marginHorizontal:15
-  }
+  heading: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 25,
+    marginTop: 40,
+    marginHorizontal: 15,
+  },
 });
 
 export default Home;

@@ -6,8 +6,14 @@ import SearchResultComponent from '../components/SearchResultComponent/SearchRes
 const SearchedCategory = () => {
   const categoryInCity = useRoute().params;
   const navigation = useNavigation();
-  StatusBar.setBackgroundColor('#181818');
-  StatusBar.setBarStyle('white');
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#181818');
+      StatusBar.setBarStyle('light-content');
+    } else {
+      return;
+    }
+  }, []);
   useEffect(() => {
     navigation.setOptions({
       title:
@@ -26,7 +32,7 @@ const SearchedCategory = () => {
   }, [categoryInCity, navigation]);
   return (
     <FlatList
-    style={{backgroundColor:"#181718"}}
+      style={{ backgroundColor: '#181718' }}
       data={categoryInCity.category}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (

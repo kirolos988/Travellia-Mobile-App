@@ -51,7 +51,7 @@ const SinglePage = () => {
   }, []);
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: categoryData.title,
+      headerTitle:name,
       headerStyle: {
         backgroundColor: '#181818',
         borderBottomWidth: 0,

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useEffect, useState } from 'react';
 import React from 'react';
-import { Axios } from '../../store/AxiosUrl';
+import { Axios } from '../store/AxiosUrl';
 import { useNavigation } from '@react-navigation/native';
 
 const CatButton = () => {
@@ -133,12 +133,10 @@ const CatButton = () => {
           placeholderTextColor={'grey'}
           value={inputVal}
           onChangeText={handleInputChange}
-          returnKeyType="search"
+          enterKeyHint="search"
           onSubmitEditing={searchValidate}
         />
-        {/* <TouchableOpacity onPress={searchValidate}>
-          <Text style={{ color: 'white' }}>Search</Text>
-        </TouchableOpacity> */}
+  
       </View>
     </View>
   );
