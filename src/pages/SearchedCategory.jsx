@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { FlatList, StatusBar } from 'react-native';
-import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
+import SearchResultComponent from '../components/SearchResultComponent';
 
 const SearchedCategory = () => {
   const categoryInCity = useRoute().params;

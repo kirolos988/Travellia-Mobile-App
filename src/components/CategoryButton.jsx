@@ -10,7 +10,7 @@ import React from 'react';
 import { Axios } from '../store/AxiosUrl';
 import { useNavigation } from '@react-navigation/native';
 
-const CatButton = () => {
+const CategoryButton = () => {
   const [activeTab, setActiveTab] = useState('Hotels');
   const [inputVal, setInputVal] = useState('');
   const [category, setCategory] = useState('');
@@ -202,4 +202,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CatButton;
+export default CategoryButton;

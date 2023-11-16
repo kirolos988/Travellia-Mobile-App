@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import Rating from '../Rating/Rating';
+import Rating from './Rating';
 
 const SearchResultComponent = ({
   image,

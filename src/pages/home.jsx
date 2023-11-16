@@ -8,9 +8,9 @@ import {
   View,
   Platform,
 } from 'react-native';
-import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
+import RandomHotelsComponent from '../components/RandomHotelsComponents';
 import { hotelsAxios } from '../store/AxiosUrl';
-import Header from '../components/Header/Header';
+import Header from '../components/Header';
 import Addvertise from '../components/adds/Addvertise';
 import { StatusBar } from 'react-native';
 
