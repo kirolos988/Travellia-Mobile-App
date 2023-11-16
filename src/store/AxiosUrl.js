@@ -10,7 +10,6 @@ export const citiesAxios = async () => {
     return response.data.cities;
   } catch (error) {
     console.log('error');
-
   }
 };
 export const hotelsAxios = async () => {
@@ -38,6 +37,18 @@ export const todoAxios = async () => {
     const response = await axiosInstance.get('/cities/thingsToDo');
     // console.log(response.data.todos);
     return response.data.todos;
+  } catch (error) {
+    console.log('error');
+    throw error;
+  }
+};
+
+export const Axios = async (category, queryName) => {
+  try {
+    const response = await axios.get(
+      `https://travelya.onrender.com/get/${category}?queryName=${queryName}`,
+    );
+    return response.data.data;
   } catch (error) {
     console.log('error');
     throw error;

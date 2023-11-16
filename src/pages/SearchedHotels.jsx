@@ -1,16 +1,51 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { FlatList } from 'react-native';
 import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
 
 const SearchedHotels = () => {
-  const hotelsInCity = useRoute().params;
-  console.log(hotelsInCity);
+  const categoryInCity = useRoute().params;
+  const navigation = useNavigation();
 
+  // const CustomBackButton = ({ onPress }) => (
+  //   <TouchableOpacity onPress={onPress}>
+  //     <Image
+  //       // source={require('../components')}
+  //       style={{ width: 24, height: 24, tintColor: 'white' }}
+  //     />
+  //   </TouchableOpacity>
+  // );
+
+  useEffect(() => {
+    navigation.setOptions({
+      title:
+        categoryInCity.category.length > 1
+          ? categoryInCity.title
+          : categoryInCity.specifiedTitle,
+      headerStyle: {
+        backgroundColor: '#181818',
+        borderBottomWidth: 0,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
+      headerTintColor: 'white',
+
+      // headerLeft: () => {
+      //   <CustomBackButton
+      //     onPress={() => {
+      //       <AntDesign name="left" size={24} color="black" />;
+      //     }}
+      //   />;
+      // },
+    });
+  }, [categoryInCity, navigation]);
   return (
     <FlatList
       data={
-        hotelsInCity.hotels || hotelsInCity.restaurants || hotelsInCity.todos
+        categoryInCity.category ||
+        categoryInCity.category ||
+        categoryInCity.category
       }
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (

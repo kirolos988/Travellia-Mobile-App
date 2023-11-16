@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -14,36 +20,16 @@ const SearchResultComponent = ({
   address,
   item,
 }) => {
-  // const [coloredCircles, setColoredCircles] = useState([]);
-
-  // useEffect(() => {
-  //   const fullCirclesCount = Math.floor(rating);
-  //   const hasHalfCircle = rating % 1 !== 0;
-
-  //   const circles = new Array(5).fill(null).map((_, index) => {
-  //     if (index < fullCirclesCount) {
-  //       return (
-  //         <View key={index} style={[styles.circle, styles.coloredCircle]} />
-  //       );
-  //     } else if (index === fullCirclesCount && hasHalfCircle) {
-  //       return (
-  //         <View key={index} style={styles.circle}>
-  //           <View style={styles.halfColoredCircle} />
-  //         </View>
-  //       );
-  //     } else {
-  //       return <View key={index} style={styles.circle} />;
-  //     }
-  //   });
-
-  //   setColoredCircles(circles);
-  // }, [rating]);
   const navigation = useNavigation();
   const handleNavigation = () => {
     navigation.navigate('SinglePage', { data: item });
   };
   return (
-    <TouchableOpacity style={styles.container} onPress={handleNavigation} activeOpacity={0.9}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      style={[styles.container, { padding: 0 }]}
+      onPress={handleNavigation}
+    >
       <View style={styles.itemContainer}>
         <Image source={{ uri: image }} style={{ width: '100%', height: 300 }} />
         <View
@@ -64,7 +50,7 @@ const SearchResultComponent = ({
             {name}
           </Text>
           <View style={styles.ratingContainer}>
-            {<Rating rating={rating}/>}
+            {<Rating rating={rating} />}
             <Text style={[styles.reviews, { justifyContent: 'flex-start' }]}>
               {reviews} review
             </Text>
@@ -93,12 +79,12 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 0,
     color: 'white',
+    borderBottomColor: '#5A5A5A',
   },
   itemContainer: {
     flex: 1,
     margin: 0,
     color: 'white',
-    borderBottomColor: '#5A5A5A',
     paddingBottom: 20,
   },
   scale: {
@@ -147,6 +133,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     paddingHorizontal: 25,
     paddingVertical: 10,
+    marginTop: 7,
     borderRadius: 23,
   },
   textButton: { fontWeight: 'bold' },
