@@ -1,13 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Rating from '../Rating/Rating';
 
 const SearchResultComponent = ({
@@ -19,10 +13,11 @@ const SearchResultComponent = ({
   money,
   address,
   item,
+  title,
 }) => {
   const navigation = useNavigation();
   const handleNavigation = () => {
-    navigation.navigate('SinglePage', { data: item });
+    navigation.navigate('SinglePage', { data: item, title: item.name });
   };
   return (
     <TouchableOpacity

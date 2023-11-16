@@ -14,7 +14,6 @@ const StackExploreNavigator = () => {
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: 'bold',
-
         },
       }}
     >
