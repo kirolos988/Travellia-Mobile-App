@@ -33,8 +33,7 @@ const StackSearchNavigator = () => {
         name="SinglePage"
         component={SinglePage}
         options={{
-          title: 'single page',
-          headerTintColor:"white",
+          headerTintColor: 'white',
           headerStyle: {
             backgroundColor: '#181818',
           },

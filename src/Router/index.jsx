@@ -55,7 +55,7 @@ const Router = () => {
             fontWeight: 'bold',
           },
           headerShown: false,
-          tabBarActiveTintColor: 'white',
+          tabBarActiveTintColor: '#5A5A5A',
         }}
       >
         {/* {isNotFoundVisible && (

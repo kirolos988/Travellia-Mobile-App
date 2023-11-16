@@ -1,5 +1,6 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
+
 import {
   View,
   Text,
@@ -10,18 +11,18 @@ import {
   Linking,
   TouchableOpacity,
   SafeAreaView,
-  StatusBar,
   ScrollView,
 } from 'react-native';
+import Rating from '../../components/Rating/Rating';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import WebView from 'react-native-webview';
-import Rating from '../../components/Rating/Rating';
 import ReadMoreComponent from '../../components/ReadMore/ReadMoreComponent';
+import WebView from 'react-native-webview';
+import { StatusBar, Platform } from 'react-native';
+
 const SinglePage = () => {
   const categoryData = useRoute().params;
-
   const {
     images,
     name,
@@ -38,7 +39,29 @@ const SinglePage = () => {
   const flatlistRef = useRef();
   const screenWidth = Dimensions.get('window').width;
   const [activeIndex, setActiveIndex] = useState(0);
-  //Auto Scroll
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#181818');
+      StatusBar.setBarStyle('light-content');
+    } else {
+      return;
+    }
+  }, []);
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: categoryData.title,
+      headerStyle: {
+        backgroundColor: '#181818',
+        borderBottomWidth: 0,
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
+      headerTintColor: 'white',
+    });
+  }, [categoryData, navigation]);
 
   const handleCallPress = () => {
     const telLink = `tel:${phone}`;
@@ -77,8 +100,6 @@ const SinglePage = () => {
     const index = scrollPosition / screenWidth;
     setActiveIndex(index);
   };
-  StatusBar.setBackgroundColor('#181818');
-  StatusBar.setBarStyle('white');
 
   return (
     <SafeAreaView
@@ -212,6 +233,7 @@ const SinglePage = () => {
   );
 };
 
+export default SinglePage;
 const styles = StyleSheet.create({
   name: {
     fontSize: 25,
@@ -264,5 +286,3 @@ const styles = StyleSheet.create({
     width: '95%',
   },
 });
-
-export default SinglePage;

@@ -42,15 +42,12 @@ const SearchedHotels = () => {
   }, [categoryInCity, navigation]);
   return (
     <FlatList
-      data={
-        categoryInCity.category ||
-        categoryInCity.category ||
-        categoryInCity.category
-      }
+      data={categoryInCity.category}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <SearchResultComponent
           item={item}
+          title={item.name}
           id={item.id}
           image={item.images[0]}
           name={item.name}
