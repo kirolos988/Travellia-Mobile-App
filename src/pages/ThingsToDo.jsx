@@ -9,7 +9,7 @@ import {
 import { Axios } from '../store/AxiosUrl';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-const Restaurants = () => {
+const ThingsToDo = () => {
   StatusBar.setBackgroundColor('#181818');
   StatusBar.setBarStyle('white');
   const data = [
@@ -21,11 +21,11 @@ const Restaurants = () => {
   ];
   const navigation = useNavigation();
   const handleNavigation = async (city) => {
-    const data = await Axios('Restaurants', city);
+    const data = await Axios('ThingsToDo', city);
     console.log(data);
     navigation.navigate('SearchStack', {
       screen: 'SearchedCategory',
-      params: { category: data, title: `Restaurants in ${city}` },
+      params: { category: data, title: `Things To Do in ${city}` },
     });
   };
   return (
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Restaurants;
+export default ThingsToDo;

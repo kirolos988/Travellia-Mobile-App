@@ -1,21 +1,13 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StatusBar } from 'react-native';
 import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
 
-const SearchedHotels = () => {
+const SearchedCategory = () => {
   const categoryInCity = useRoute().params;
   const navigation = useNavigation();
-
-  // const CustomBackButton = ({ onPress }) => (
-  //   <TouchableOpacity onPress={onPress}>
-  //     <Image
-  //       // source={require('../components')}
-  //       style={{ width: 24, height: 24, tintColor: 'white' }}
-  //     />
-  //   </TouchableOpacity>
-  // );
-
+  StatusBar.setBackgroundColor('#181818');
+  StatusBar.setBarStyle('white');
   useEffect(() => {
     navigation.setOptions({
       title:
@@ -30,23 +22,11 @@ const SearchedHotels = () => {
         color: 'white',
       },
       headerTintColor: 'white',
-
-      // headerLeft: () => {
-      //   <CustomBackButton
-      //     onPress={() => {
-      //       <AntDesign name="left" size={24} color="black" />;
-      //     }}
-      //   />;
-      // },
     });
   }, [categoryInCity, navigation]);
   return (
     <FlatList
-      data={
-        categoryInCity.category ||
-        categoryInCity.category ||
-        categoryInCity.category
-      }
+      data={categoryInCity.category}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
         <SearchResultComponent
@@ -65,4 +45,4 @@ const SearchedHotels = () => {
   );
 };
 
-export default SearchedHotels;
+export default SearchedCategory;

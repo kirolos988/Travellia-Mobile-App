@@ -26,7 +26,7 @@ const SearchResultComponent = ({
   };
   return (
     <TouchableOpacity
-      activeOpacity={0.9}
+      activeOpacity={1}
       style={[styles.container, { padding: 0 }]}
       onPress={handleNavigation}
     >
@@ -38,24 +38,39 @@ const SearchResultComponent = ({
             paddingHorizontal: 12,
           }}
         >
-          <Text
-            style={[
-              styles.scale,
-              styles.name,
-              { justifyContent: 'flex-start' },
-            ]}
-            numberOfLines={1}
-            ellipsizeMode="tail"
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
           >
-            {name}
-          </Text>
-          <View style={styles.ratingContainer}>
-            {<Rating rating={rating} />}
-            <Text style={[styles.reviews, { justifyContent: 'flex-start' }]}>
-              {reviews} review
-            </Text>
+            <View style={{ width: '70%' }}>
+              <Text
+                style={[
+                  styles.scale,
+                  styles.name,
+                  { justifyContent: 'flex-start' },
+                ]}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {name}
+              </Text>
+              <View style={styles.ratingContainer}>
+                {<Rating rating={rating} />}
+                <Text
+                  style={[styles.reviews, { justifyContent: 'flex-start' }]}
+                >
+                  {reviews} review
+                </Text>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+              <Text style={styles.textButton}>View Deal</Text>
+            </TouchableOpacity>
           </View>
-          {money && <Text style={styles.scale}>{money}</Text>}
+          {money && <Text style={[styles.scale,{fontWeight:"600"}]}>{money}</Text>}
           <Text
             style={[styles.scale, { alignItems: 'flex-start' }]}
             numberOfLines={1}
@@ -64,9 +79,6 @@ const SearchResultComponent = ({
             {locationName && locationName}
             {address && address}
           </Text>
-          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-            <Text style={styles.textButton}>View Deal</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
@@ -76,10 +88,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#181818',
-    paddingVertical: 30,
+    paddingVertical: 20,
     paddingHorizontal: 0,
     color: 'white',
     borderBottomColor: '#5A5A5A',
+    borderBottomWidth: 1,
   },
   itemContainer: {
     flex: 1,
@@ -88,8 +101,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   scale: {
-    padding: 3,
-
+    padding: 2,
+    marginVertical: 1,
     color: 'white',
     alignItems: 'center',
   },
@@ -127,13 +140,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 0,
+    paddingVertical:1
   },
   button: {
     backgroundColor: '#FBC661',
-    alignSelf: 'flex-end',
     paddingHorizontal: 25,
     paddingVertical: 10,
-    marginTop: 7,
+    marginTop: 0,
     borderRadius: 23,
   },
   textButton: { fontWeight: 'bold' },
