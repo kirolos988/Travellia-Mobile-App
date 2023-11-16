@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 7,
   },
+
 });
 
 export default RandomHotelsComponent;
