@@ -21,7 +21,6 @@ import Rating from '../components/Rating/Rating';
 import ReadMoreComponent from '../components/ReadMore/ReadMoreComponent';
 const SinglePage = () => {
   const categoryData = useRoute().params;
-
   const {
     images,
     name,
@@ -38,8 +37,8 @@ const SinglePage = () => {
   const flatlistRef = useRef();
   const screenWidth = Dimensions.get('window').width;
   const [activeIndex, setActiveIndex] = useState(0);
-  //Auto Scroll
 
+//linking phone number
   const handleCallPress = () => {
     const telLink = `tel:${phone}`;
 
@@ -54,6 +53,7 @@ const SinglePage = () => {
       .catch((err) => console.error('An error occurred', err));
   };
 
+//slider images
   useEffect(() => {
     let interval = setInterval(() => {
       if (images.length > 1) {
@@ -77,6 +77,8 @@ const SinglePage = () => {
     const index = scrollPosition / screenWidth;
     setActiveIndex(index);
   };
+
+  //coloring system bar 
   StatusBar.setBackgroundColor('#181818');
   StatusBar.setBarStyle('white');
 

@@ -26,6 +26,7 @@ const SearchedCategory = () => {
   }, [categoryInCity, navigation]);
   return (
     <FlatList
+    style={{backgroundColor:"#181718"}}
       data={categoryInCity.category}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (
