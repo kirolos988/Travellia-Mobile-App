@@ -20,8 +20,9 @@ const Home = () => {
     const fetchHotels = async () => {
       try {
         const data = await hotelsAxios();
-        setHotels(data);
         setLoading(false);
+        const randomHotels = getRandomHotels(data,20)
+        setHotels(randomHotels);
       } catch (error) {
         console.error('Error fetching hotels:', error);
         setLoading(false);
@@ -30,6 +31,11 @@ const Home = () => {
 
     fetchHotels();
   }, []);
+
+  const getRandomHotels = (array, count) => {
+    const shuffledArray = array.sort(() => Math.random() - 0.5);
+    return shuffledArray.slice(0, count);
+  };
 
   return (
     <ScrollView style={styles.mainContainer}>

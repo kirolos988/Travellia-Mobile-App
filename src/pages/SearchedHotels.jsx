@@ -6,9 +6,7 @@ import SearchResultComponent from '../components/SearchResultComponent/SearchRes
 const SearchedHotels = () => {
   const hotelsInCity = useRoute().params;
   console.log(hotelsInCity);
-  // useEffect(()=>{
 
-  // },[])
   return (
     <FlatList
       data={
@@ -18,7 +16,6 @@ const SearchedHotels = () => {
       renderItem={({ item }) => (
         <SearchResultComponent
           item={item}
-          id={item.id}
           image={item.images[0]}
           name={item.name}
           rating={item.rating}
