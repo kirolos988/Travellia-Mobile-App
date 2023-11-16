@@ -22,4 +22,7 @@
     npm install axios
 #to install webView for the location map
     npm install react-native-webview
+#to update react native to the latest version
+    npm install react-native@latest
+    
     
