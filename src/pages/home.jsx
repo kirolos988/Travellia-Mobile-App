@@ -20,8 +20,9 @@ const Home = () => {
     const fetchHotels = async () => {
       try {
         const data = await hotelsAxios();
-        setHotels(data);
         setLoading(false);
+        const randomHotels = getRandomHotels(data, 20);
+        setHotels(randomHotels);
       } catch (error) {
         console.error('Error fetching hotels:', error);
         setLoading(false);
@@ -31,9 +32,15 @@ const Home = () => {
     fetchHotels();
   }, []);
 
+  const getRandomHotels = (array, count) => {
+    const shuffledArray = array.sort(() => Math.random() - 0.5);
+    return shuffledArray.slice(0, count);
+  };
+
   return (
     <ScrollView style={styles.mainContainer}>
       <Header />
+      <Text style={styles.heading}>Worldwide Top Rated Hotels</Text>
       {loading ? (
         <Text>Loading...</Text>
       ) : hotels.length > 0 ? (
@@ -68,6 +75,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#181818',
     flex: 1,
   },
+  heading:{
+    color:"white",
+    fontWeight:"700",
+    fontSize:25,
+    marginTop:40,
+    marginHorizontal:15
+  }
 });
 
 export default Home;

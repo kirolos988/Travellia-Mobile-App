@@ -26,7 +26,7 @@ const CatButton = () => {
       console.log(data);
       setData(data);
       if (data.length > 0) {
-        navigation.navigate('SearchedHotels', {
+        navigation.navigate('SearchedCategory', {
           category: data,
           title: `"${inputVal}" ${activeTab} `,
           specifiedTitle: `${inputVal}`,
@@ -136,9 +136,9 @@ const CatButton = () => {
           returnKeyType="search"
           onSubmitEditing={searchValidate}
         />
-        <TouchableOpacity onPress={searchValidate}>
+        {/* <TouchableOpacity onPress={searchValidate}>
           <Text style={{ color: 'white' }}>Search</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );

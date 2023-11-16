@@ -105,14 +105,14 @@ const SinglePage = () => {
     <SafeAreaView
       style={{ backgroundColor: '#181818', flex: 1, position: 'relative' }}
     >
-      <ScrollView style={{}}>
+      <ScrollView>
         <FlatList
           style={{ flexGrow: 0 }}
           data={images}
           ref={flatlistRef}
           getItemLayout={getItemLayout}
-          renderItem={({ item }) => (
-            <View style={{ height: 300 }} key={Math.random()}>
+          renderItem={({ item, index }) => (
+            <View style={{ height: 300 }} key={index}>
               <Image
                 source={{ uri: item }}
                 style={{ flex: 1, width: screenWidth }}
@@ -123,7 +123,7 @@ const SinglePage = () => {
           horizontal={true}
           onScroll={handleScroll}
           pagingEnabled={true}
-        ></FlatList>
+        />
         <View style={{ paddingHorizontal: 10, flex: 1 }}>
           <Text style={styles.name}>{name}</Text>
           <View style={styles.ratingContainer}>

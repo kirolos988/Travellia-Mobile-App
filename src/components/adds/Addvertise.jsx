@@ -1,29 +1,30 @@
-import { View, Text } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import React from 'react';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Addvertise = () => {
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('./assets/roadtrips.jpg')}
-        style={styles.backgroundImage}
-      />
-      <View style={styles.overlay} />
-      <View style={styles.content}>
-        <Text style={styles.title}>The Essential road-trip guide</Text>
+    <ImageBackground
+      style={styles.container}
+      source={require('./assets/roadtrips.jpg')}
+    >
+      <View style={styles.box}>
+        <View style={styles.overlay} />
+        <View style={styles.content}>
+          <Text style={styles.title}>The Essential road-trip guide</Text>
 
-        <Text style={styles.description}>
-          Everything you need to pack up, drive.and enjoy the ride.
-        </Text>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('Read More')}
-        >
-          <Text style={styles.buttonText}>See More</Text>
-        </TouchableOpacity>
+          <Text style={styles.description}>
+            Everything you need to pack up, drive.and enjoy the ride.
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => alert('Read More')}
+          >
+            <Text style={styles.buttonText}>See More</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -31,42 +32,45 @@ const styles = StyleSheet.create({
   container: {
     position: 'relative',
     width: '100%',
-    aspectRatio: 16 / 9,
     marginTop: 50,
-  },
-  backgroundImage: {
-    flex: 1,
+    height: 500,
     resizeMode: 'cover',
-    width:"100%"
+  },
+  box: {
+    flex: 1,
+    position: 'absolute',
+    left: 0,
+    padding: 10,
+    width: '100%',
+    textAlign: 'left',
+    height: '100%',
+
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
   },
   content: {
-    position: 'absolute',
-    top: '20%',
-    left:0,
-    padding: 10,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    height:"100%",
     width:"100%",
-    textAlign:"left"
+    padding:10,
+    paddingBottom:50
   },
   title: {
     color: 'white',
     fontSize: 40,
-    // marginRight: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    width:"100%"
+    width: '100%',
+    lineHeight:50
   },
   description: {
     color: 'white',
     marginRight: 30,
-    alignItems: 'center',
-    textAlign: 'center',
-    justifyContent: 'center',
     fontSize: 16,
     marginBottom: 10,
   },
@@ -80,7 +84,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     position: 'relative',
     top: 2,
-    left: 100,
     // right: '50%',
   },
   buttonText: {

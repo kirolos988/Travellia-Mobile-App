@@ -1,8 +1,8 @@
 import React from 'react';
 import Search from '../pages/Search';
-import SearchedHotels from '../pages/SearchedHotels';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SinglePage from '../pages/SinglePage/SinglePage';
+import SinglePage from '../pages/SinglePage';
+import SearchedCategory from '../pages/SearchedCategory';
 const Stack = createNativeStackNavigator();
 
 const StackSearchNavigator = () => {
@@ -22,8 +22,8 @@ const StackSearchNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SearchedHotels"
-        component={SearchedHotels}
+        name="SearchedCategory"
+        component={SearchedCategory}
         options={{
           title: 'Hotels and Places to Stay',
         }}

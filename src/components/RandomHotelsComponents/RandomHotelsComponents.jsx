@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import Rating from '../Rating/Rating';
 
 const RandomHotelsComponent = ({
   image,
@@ -8,40 +9,22 @@ const RandomHotelsComponent = ({
   locationName,
   reviews,
 }) => {
-  const [coloredCircles, setColoredCircles] = useState([]);
-
-  useEffect(() => {
-    const fullCirclesCount = Math.floor(rating);
-    const hasHalfCircle = rating % 1 !== 0;
-
-    const circles = new Array(5).fill(null).map((_, index) => {
-      if (index < fullCirclesCount) {
-        return (
-          <View key={index} style={[styles.circle, styles.coloredCircle]} />
-        );
-      } else if (index === fullCirclesCount && hasHalfCircle) {
-        return (
-          <View key={index} style={styles.circle}>
-            <View style={styles.halfColoredCircle} />
-          </View>
-        );
-      } else {
-        return <View key={index} style={styles.circle} />;
-      }
-    });
-
-    setColoredCircles(circles);
-  }, [rating]);
-
   return (
     <View style={styles.container}>
       <View style={styles.itemContainer}>
-        <Image source={{ uri: image }} style={{ width: '100%', height: 300, borderRadius: 7 }} />
-        <Text style={[styles.scale, styles.name]} numberOfLines={1} ellipsizeMode="tail">
+        <Image
+          source={{ uri: image }}
+          style={{ width: '100%', height: 300, borderRadius: 7 }}
+        />
+        <Text
+          style={[styles.scale, styles.name]}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
           {name}
         </Text>
         <View style={styles.ratingContainer}>
-          {coloredCircles}
+          {<Rating rating={rating} />}
           <Text style={styles.reviews}>{reviews} review</Text>
         </View>
         <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">
@@ -71,7 +54,7 @@ const styles = StyleSheet.create({
     padding: 3,
     marginVertical: 3,
     color: 'white',
-    marginHorizontal:5
+    marginHorizontal: 5,
   },
   reviews: {
     color: 'white',
@@ -107,6 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 7,
   },
+
 });
 
 export default RandomHotelsComponent;
