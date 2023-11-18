@@ -10,6 +10,7 @@ import { Axios } from '../store/AxiosUrl';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
 const Hotels = () => {
   useEffect(() => {
     if (Platform.OS === 'android') {

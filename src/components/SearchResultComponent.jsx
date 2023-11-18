@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Rating from './Rating';
-
+import Svg, { Path } from 'react-native-svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavorites, removeFromFavorites } from '../store/AppSlice';
 const SearchResultComponent = ({
   image,
   name,
@@ -13,70 +15,110 @@ const SearchResultComponent = ({
   money,
   address,
   item,
-  title,
 }) => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const handleNavigation = () => {
     navigation.navigate('SinglePage', { data: item, title: item.name });
   };
+  const favorites = useSelector((state) => state.Favorite.favorites);
+  const isFavorite = (todoId) => {
+    return favorites.some((item) => item.id === todoId);
+  };
+
+  const handleFavoriteToggle = (todo) => {
+    if (isFavorite(todo.id)) {
+      dispatch(removeFromFavorites(todo.id));
+    } else {
+      dispatch(addToFavorites(todo));
+    }
+  };
   return (
-    <TouchableOpacity
-      activeOpacity={1}
-      style={[styles.container, { padding: 0 }]}
-      onPress={handleNavigation}
-    >
-      <View style={styles.itemContainer}>
-        <Image source={{ uri: image }} style={{ width: '100%', height: 300 }} />
-        <View
-          style={{
-            paddingTop: 10,
-            paddingHorizontal: 12,
-          }}
+    <View>
+      <View style={styles.rounded}>
+        <Svg
+          style={[
+            styles.like,
+            { fill: isFavorite(item.id) ? 'red' : 'none' },
+            { stroke: isFavorite(item.id) ? 'transparent' : 'gray' },
+          ]}
+          width={30}
+          height={30}
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="gray"
+          onPress={() => handleFavoriteToggle(item)}
         >
+          <Path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+          />
+        </Svg>
+      </View>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={[styles.container, { padding: 0 }]}
+        onPress={handleNavigation}
+      >
+        <View style={styles.itemContainer}>
+          <Image
+            source={{ uri: image }}
+            style={{ width: '100%', height: 300 }}
+          />
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              paddingTop: 10,
+              paddingHorizontal: 12,
             }}
           >
-            <View style={{ width: '70%' }}>
-              <Text
-                style={[
-                  styles.scale,
-                  styles.name,
-                  { justifyContent: 'flex-start' },
-                ]}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {name}
-              </Text>
-              <View style={styles.ratingContainer}>
-                {<Rating rating={rating} />}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <View style={{ width: '70%' }}>
                 <Text
-                  style={[styles.reviews, { justifyContent: 'flex-start' }]}
+                  style={[
+                    styles.scale,
+                    styles.name,
+                    { justifyContent: 'flex-start' },
+                  ]}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
                 >
-                  {reviews} review
+                  {name}
                 </Text>
+                <View style={styles.ratingContainer}>
+                  {<Rating rating={rating} />}
+                  <Text
+                    style={[styles.reviews, { justifyContent: 'flex-start' }]}
+                  >
+                    {reviews} review
+                  </Text>
+                </View>
               </View>
+              <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+                <Text style={styles.textButton}>View Deal</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-              <Text style={styles.textButton}>View Deal</Text>
-            </TouchableOpacity>
+            {money && (
+              <Text style={[styles.scale, { fontWeight: '600' }]}>{money}</Text>
+            )}
+            <Text
+              style={[styles.scale, { alignItems: 'flex-start' }]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {locationName && locationName}
+              {address && address}
+            </Text>
           </View>
-          {money && <Text style={[styles.scale,{fontWeight:"600"}]}>{money}</Text>}
-          <Text
-            style={[styles.scale, { alignItems: 'flex-start' }]}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {locationName && locationName}
-            {address && address}
-          </Text>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -135,7 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 0,
-    paddingVertical:1
+    paddingVertical: 1,
   },
   button: {
     backgroundColor: '#FBC661',
@@ -145,5 +187,18 @@ const styles = StyleSheet.create({
     borderRadius: 23,
   },
   textButton: { fontWeight: 'bold' },
+  rounded: {
+    backgroundColor: 'white',
+    borderRadius: 22.5,
+    width: 45,
+    height: 45,
+    position: 'absolute',
+    right: 15,
+    top: 35,
+    zIndex: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  like: {},
 });
 export default SearchResultComponent;
