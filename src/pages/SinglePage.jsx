@@ -13,11 +13,11 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import Rating from '../components/Rating/Rating';
+import Rating from '../components/Rating';
 import { Fontisto } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import ReadMoreComponent from '../components/ReadMore/ReadMoreComponent';
+import ReadMoreComponent from '../components/ReadMoreComponent';
 import WebView from 'react-native-webview';
 import { StatusBar, Platform } from 'react-native';
 
@@ -51,7 +51,7 @@ const SinglePage = () => {
   }, []);
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: categoryData.title,
+      headerTitle:name,
       headerStyle: {
         backgroundColor: '#181818',
         borderBottomWidth: 0,
@@ -63,6 +63,7 @@ const SinglePage = () => {
     });
   }, [categoryData, navigation]);
 
+//linking phone number
   const handleCallPress = () => {
     const telLink = `tel:${phone}`;
 
@@ -77,6 +78,7 @@ const SinglePage = () => {
       .catch((err) => console.error('An error occurred', err));
   };
 
+//slider images
   useEffect(() => {
     let interval = setInterval(() => {
       if (images.length > 1) {
@@ -100,6 +102,10 @@ const SinglePage = () => {
     const index = scrollPosition / screenWidth;
     setActiveIndex(index);
   };
+
+  //coloring system bar 
+  StatusBar.setBackgroundColor('#181818');
+  StatusBar.setBarStyle('white');
 
   return (
     <SafeAreaView

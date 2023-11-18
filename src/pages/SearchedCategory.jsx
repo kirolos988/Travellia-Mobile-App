@@ -1,13 +1,20 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { FlatList, StatusBar } from 'react-native';
-import SearchResultComponent from '../components/SearchResultComponent/SearchResultComponent';
+import SearchResultComponent from '../components/SearchResultComponent';
+import { Platform } from 'react-native';
 
 const SearchedCategory = () => {
   const categoryInCity = useRoute().params;
   const navigation = useNavigation();
-  StatusBar.setBackgroundColor('#181818');
-  StatusBar.setBarStyle('white');
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#181818');
+      StatusBar.setBarStyle('light-content');
+    } else {
+      return;
+    }
+  }, []);
   useEffect(() => {
     navigation.setOptions({
       title:
@@ -26,6 +33,7 @@ const SearchedCategory = () => {
   }, [categoryInCity, navigation]);
   return (
     <FlatList
+      style={{ backgroundColor: '#181718' }}
       data={categoryInCity.category}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }) => (

@@ -9,9 +9,16 @@ import {
 import { Axios } from '../store/AxiosUrl';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useEffect } from 'react';
 const ThingsToDo = () => {
-  StatusBar.setBackgroundColor('#181818');
-  StatusBar.setBarStyle('white');
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      StatusBar.setBackgroundColor('#181818');
+      StatusBar.setBarStyle('light-content');
+    } else {
+      return;
+    }
+  }, []);
   const data = [
     { city: 'Cairo', address: 'Cairo Governorate, Egypt' },
     { city: 'Rome', address: 'Lazio, Italy' },
