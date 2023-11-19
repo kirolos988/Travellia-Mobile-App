@@ -20,7 +20,8 @@ import { Ionicons } from '@expo/vector-icons';
 import ReadMoreComponent from '../components/ReadMoreComponent';
 import WebView from 'react-native-webview';
 import { StatusBar, Platform } from 'react-native';
-
+import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 const SinglePage = () => {
   const categoryData = useRoute().params;
   const {
@@ -34,6 +35,12 @@ const SinglePage = () => {
     description,
     money,
     location,
+    address,
+    recommendation,
+    duration,
+    tours,
+    cancellation,
+    about
   } = categoryData.data;
   const { locationName, locationAddress } = location || {};
   const flatlistRef = useRef();
@@ -51,7 +58,7 @@ const SinglePage = () => {
   }, []);
   useEffect(() => {
     navigation.setOptions({
-      headerTitle:name,
+      headerTitle: name,
       headerStyle: {
         backgroundColor: '#181818',
         borderBottomWidth: 0,
@@ -63,7 +70,7 @@ const SinglePage = () => {
     });
   }, [categoryData, navigation]);
 
-//linking phone number
+  //linking phone number
   const handleCallPress = () => {
     const telLink = `tel:${phone}`;
 
@@ -78,7 +85,7 @@ const SinglePage = () => {
       .catch((err) => console.error('An error occurred', err));
   };
 
-//slider images
+  //slider images
   useEffect(() => {
     let interval = setInterval(() => {
       if (images.length > 1) {
@@ -103,7 +110,7 @@ const SinglePage = () => {
     setActiveIndex(index);
   };
 
-  //coloring system bar 
+  //coloring system bar
   StatusBar.setBackgroundColor('#181818');
   StatusBar.setBarStyle('white');
 
@@ -159,6 +166,96 @@ const SinglePage = () => {
                 </Text>
               </View>
             )}
+            {address && (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  width: '100%',
+                }}
+              >
+                <Ionicons
+                  name="location-outline"
+                  size={16}
+                  color="white"
+                  style={{ marginRight: 5 }}
+                />
+
+                <Text style={styles.locationName}>{address}</Text>
+              </View>
+            )}
+            {recommendation && (
+              <Text
+                style={{
+                  marginVertical: 8,
+                  color: 'white',
+                  textDecorationLine: 'underline',
+                  fontSize: 16,
+                }}
+              >
+                {recommendation}
+              </Text>
+            )}
+            {duration && (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Ionicons
+                  name="timer-outline"
+                  size={16}
+                  color="white"
+                  style={{ marginRight: 5 }}
+                />
+                <Text
+                  style={{
+                    marginVertical: 8,
+                    color: 'white',
+                    textDecorationLine: 'underline',
+                    fontSize: 16,
+                  }}
+                >
+                  {duration}
+                </Text>
+              </View>
+            )}
+            {tours && (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialIcons
+                  name="tour"
+                  size={16}
+                  color="white"
+                  style={{ marginRight: 5 }}
+                />
+                <Text
+                  style={{
+                    marginVertical: 8,
+                    color: 'white',
+                    textDecorationLine: 'underline',
+                    fontSize: 16,
+                  }}
+                >
+                  {tours}
+                </Text>
+              </View>
+            )}
+            {cancellation && (
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <MaterialCommunityIcons
+                  name="ticket-outline"
+                  size={16}
+                  color="white"
+                  style={{ marginRight: 5 }}
+                />
+                <Text
+                  style={{
+                    marginVertical: 8,
+                    color: 'white',
+                    textDecorationLine: 'underline',
+                    fontSize: 16,
+                  }}
+                >
+                  {cancellation}
+                </Text>
+              </View>
+            )}
             {phone && (
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Feather
@@ -193,6 +290,7 @@ const SinglePage = () => {
               </Text>
             )}
             {description && <ReadMoreComponent text={description} />}
+            {about && <ReadMoreComponent text={about} />}
             {locationName && (
               <View
                 style={{
