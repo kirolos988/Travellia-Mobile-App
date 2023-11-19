@@ -26,11 +26,11 @@ const SearchResultComponent = ({
     return favorites.some((item) => item.id === todoId);
   };
 
-  const handleFavoriteToggle = (todo) => {
-    if (isFavorite(todo.id)) {
-      dispatch(removeFromFavorites(todo.id));
+  const handleFavoriteToggle = (item) => {
+    if (isFavorite(item.id)) {
+      dispatch(removeFromFavorites(item.id));
     } else {
-      dispatch(addToFavorites(todo));
+      dispatch(addToFavorites(item));
     }
   };
   return (

@@ -20,7 +20,7 @@ const Favourites = () => {
       <Text style={styles.header}>Favorite Items</Text>
       <View>
         {favorites.length === 0 ? (
-          <View style={{ flex: 1 }}><Text>No favorites yet</Text></View>
+          <View style={{ flex: 1 }}><Text style={{color:"white"}}>No favorites yet</Text></View>
         ) : (
           <FlatList
             style={{ backgroundColor: '#181718' }}
