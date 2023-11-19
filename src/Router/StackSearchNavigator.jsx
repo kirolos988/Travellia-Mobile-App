@@ -10,6 +10,7 @@ const StackSearchNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
+        headerBackTitle: false,
         headerTitleStyle: {
           fontSize: 10,
           fontWeight: 'bold',

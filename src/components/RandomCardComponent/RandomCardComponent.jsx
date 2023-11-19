@@ -1,19 +1,25 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { Text, FlatList, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../../store/AxiosUrl';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import RandomHotelsComponent from '../RandomHotelsComponents';
 
-const RandomCardComponent = ({ category }) => {
+const RandomCardComponent = ({ category, categoryName }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axiosInstance.get(`/${category}`);
-        console.log(data);
-        const randomCategory = getRandomCards(data, 20);
+        const responseData = await axiosInstance.get(`/${category}`);
+        const dataa =
+          responseData.data.hotels ||
+          responseData.data.restaurants ||
+          responseData.data.todos;
+        const randomCategory = getRandomCards(dataa, 20);
+        console.log(randomCategory);
         setData(randomCategory);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching hotels:', error);
         setLoading(false);
@@ -30,6 +36,8 @@ const RandomCardComponent = ({ category }) => {
 
   return (
     <SafeAreaView>
+      <Text style={styles.heading}>Worldwide Top Rated {categoryName}</Text>
+
       {loading ? (
         <Text>Loading...</Text>
       ) : data.length > 0 ? (
@@ -57,5 +65,13 @@ const RandomCardComponent = ({ category }) => {
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  heading: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 20,
+    marginTop: 40,
+    marginHorizontal: 15,
+  },
+});
 export default RandomCardComponent;
