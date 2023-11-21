@@ -51,7 +51,7 @@ const SinglePage = () => {
   }, []);
   useEffect(() => {
     navigation.setOptions({
-      headerTitle:name,
+      headerTitle: name,
       headerStyle: {
         backgroundColor: '#181818',
         borderBottomWidth: 0,
@@ -63,7 +63,7 @@ const SinglePage = () => {
     });
   }, [categoryData, navigation]);
 
-//linking phone number
+  //linking phone number
   const handleCallPress = () => {
     const telLink = `tel:${phone}`;
 
@@ -78,7 +78,7 @@ const SinglePage = () => {
       .catch((err) => console.error('An error occurred', err));
   };
 
-//slider images
+  //slider images
   useEffect(() => {
     let interval = setInterval(() => {
       if (images.length > 1) {
@@ -103,7 +103,7 @@ const SinglePage = () => {
     setActiveIndex(index);
   };
 
-  //coloring system bar 
+  //coloring system bar
   StatusBar.setBackgroundColor('#181818');
   StatusBar.setBarStyle('white');
 

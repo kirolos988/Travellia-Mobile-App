@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { Axios } from '../store/AxiosUrl';
 import { Ionicons } from '@expo/vector-icons';

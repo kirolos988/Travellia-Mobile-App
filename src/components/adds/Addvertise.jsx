@@ -2,20 +2,18 @@ import { View, Text, ImageBackground } from 'react-native';
 import React from 'react';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Addvertise = () => {
+const Addvertise = ({ img, text, header }) => {
   return (
     <ImageBackground
       style={styles.container}
-      source={require('./assets/roadtrips.jpg')}
+      source={require(`./assets/${img}`)}
     >
       <View style={styles.box}>
         <View style={styles.overlay} />
         <View style={styles.content}>
-          <Text style={styles.title}>The Essential road-trip guide</Text>
+          <Text style={styles.title}>{header}</Text>
 
-          <Text style={styles.description}>
-            Everything you need to pack up, drive.and enjoy the ride.
-          </Text>
+          <Text style={styles.description}>{text} </Text>
           <TouchableOpacity
             style={styles.button}
             onPress={() => alert('Read More')}
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'left',
     height: '100%',
-
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
@@ -53,10 +50,10 @@ const styles = StyleSheet.create({
   content: {
     alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    height:"100%",
-    width:"100%",
-    padding:10,
-    paddingBottom:50
+    height: '100%',
+    width: '100%',
+    padding: 10,
+    paddingBottom: 50,
   },
   title: {
     color: 'white',
@@ -66,7 +63,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    lineHeight:50
+    lineHeight: 50,
   },
   description: {
     color: 'white',

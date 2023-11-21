@@ -7,11 +7,10 @@ import { loadFavorites } from '../store/AppSlice';
 
 const Favourites = () => {
   const favorites = useSelector((state) => state.Favorite.favorites);
-  dispatch = useDispatch()
-  useEffect(()=>{
-    dispatch(loadFavorites())
-
-  },[])
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadFavorites());
+  }, []);
   // const handleRemoveFavorite = favoriteId => {
   //   dispatch(removeFromFavorites(favoriteId));
   // };
@@ -20,7 +19,11 @@ const Favourites = () => {
       <Text style={styles.header}>Favorite Items</Text>
       <View>
         {favorites.length === 0 ? (
-          <View style={{ flex: 1 }}><Text style={{color:"white"}}>No favorites yet</Text></View>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: 'white', paddingLeft: 10, fontSize: 20 }}>
+              No favorites yet..
+            </Text>
+          </View>
         ) : (
           <FlatList
             style={{ backgroundColor: '#181718' }}
@@ -28,7 +31,7 @@ const Favourites = () => {
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
               <SearchResultComponent
-              // handleRemoveFavorite={handleRemoveFavorite(item.id)}
+                // handleRemoveFavorite={handleRemoveFavorite(item.id)}
                 item={item}
                 image={item.images[0]}
                 name={item.name}

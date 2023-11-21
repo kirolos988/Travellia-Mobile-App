@@ -2,7 +2,7 @@ import { Text, FlatList, StyleSheet } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { axiosInstance } from '../../store/AxiosUrl';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import RandomHotelsComponent from '../RandomHotelsComponents';
+import RandomCategoryComponent from '../RandomCategoryComponents';
 
 const RandomCardComponent = ({ category, categoryName }) => {
   const [data, setData] = useState([]);
@@ -49,7 +49,8 @@ const RandomCardComponent = ({ category, categoryName }) => {
           legacyImplementation={false}
           data={data}
           renderItem={({ item }) => (
-            <RandomHotelsComponent
+            <RandomCategoryComponent
+              data={item}
               image={item.images[0]}
               name={item.name}
               rating={item.rating}

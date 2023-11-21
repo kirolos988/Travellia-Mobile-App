@@ -1,4 +1,3 @@
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
@@ -12,8 +11,6 @@ const NotFoundStack = createNativeStackNavigator();
 // const RootStack = createNativeStackNavigator();
 
 const Router = () => {
-
-
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -77,7 +74,7 @@ const Router = () => {
                 color={color}
               />
             ),
-            tabBarLabel: 'Favourites',
+            tabBarLabel: 'Plan',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
             tabBarActiveTintColor: 'white',

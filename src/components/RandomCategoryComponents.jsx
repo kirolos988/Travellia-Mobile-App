@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import Rating from './Rating';
+import { useNavigation } from '@react-navigation/native';
 
-const RandomHotelsComponent = ({
+const RandomCategoryComponent = ({
   image,
   name,
   rating,
   locationName,
   reviews,
+  data,
 }) => {
+  const navigation = useNavigation();
+  const handleNavigation = () => {
+    navigation.navigate('SearchStack', {
+      screen: 'SinglePage',
+      params: { data: data, title: `${name}` },
+    });
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.itemContainer}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.itemContainer}
+        onPress={handleNavigation}
+      >
         <Image
           source={{ uri: image }}
           style={{ width: '100%', height: 300, borderRadius: 7 }}
@@ -30,7 +43,7 @@ const RandomHotelsComponent = ({
         <Text style={styles.scale} numberOfLines={1} ellipsizeMode="tail">
           {locationName}
         </Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -90,7 +103,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 7,
   },
-
 });
 
-export default RandomHotelsComponent;
+export default RandomCategoryComponent;
