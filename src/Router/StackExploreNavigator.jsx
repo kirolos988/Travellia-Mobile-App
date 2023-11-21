@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Hotels from '../pages/Hotels/Hotels';
-import Restaurants from '../pages/Restaurants/Restaurants';
-import ThingsToDo from '../pages/ThingsToDo/ThingsToDo';
-import Home from '../pages/home';
+import Hotels from '../pages/Hotels';
+import Restaurants from '../pages/Restaurants';
+import ThingsToDo from '../pages/ThingsToDo';
+import Home from '../pages/Home';
 const Stack = createNativeStackNavigator();
 
 const StackExploreNavigator = () => {
@@ -14,7 +14,6 @@ const StackExploreNavigator = () => {
         headerTitleStyle: {
           fontSize: 20,
           fontWeight: 'bold',
-
         },
       }}
     >
@@ -28,6 +27,10 @@ const StackExploreNavigator = () => {
         component={Hotels}
         options={{
           title: 'Hotels and Places to Stay',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
         }}
       />
       <Stack.Screen
@@ -35,6 +38,10 @@ const StackExploreNavigator = () => {
         component={Restaurants}
         options={{
           title: 'Restaurants',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
         }}
       />
       <Stack.Screen
@@ -42,6 +49,10 @@ const StackExploreNavigator = () => {
         component={ThingsToDo}
         options={{
           title: 'Things To Do',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
         }}
       />
     </Stack.Navigator>

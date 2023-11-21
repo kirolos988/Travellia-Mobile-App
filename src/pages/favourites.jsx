@@ -1,11 +1,47 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
+import SearchResultComponent from '../components/SearchResultComponent';
+import { loadFavorites } from '../store/AppSlice';
 
 const Favourites = () => {
+  const favorites = useSelector((state) => state.Favorite.favorites);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadFavorites());
+  }, []);
+
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <Text>Favourites</Text>
+      <Text style={styles.header}>Favorite Items</Text>
+      <View>
+        {favorites.length === 0 ? (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={{ color: 'white' }}>No favorites yet</Text>
+          </View>
+        ) : (
+          <FlatList
+            style={{ backgroundColor: '#181718' }}
+            data={favorites}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <SearchResultComponent
+                item={item}
+                image={item.images[0]}
+                name={item.name}
+                rating={item.rating}
+                locationName={item.location?.locationName}
+                address={item.address}
+                reviews={item.reviews}
+                website={item.website}
+                money={item.money}
+              />
+            )}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };
@@ -13,8 +49,16 @@ const Favourites = () => {
 export default Favourites;
 
 const styles = StyleSheet.create({
-  // mainContainer: {
-  //   backgroundColor: '#181818',
-  //   flex: 1,
-  // },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#181718',
+    paddingVertical: 20,
+  },
+  header: {
+    fontWeight: 'bold',
+    color: 'white',
+    padding: 10,
+    fontSize: 23,
+    marginBottom: 20,
+  },
 });

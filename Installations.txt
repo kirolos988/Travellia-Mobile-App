@@ -20,6 +20,12 @@
     npm install @react-navigation/native-stack
 #to install axios
     npm install axios
+#to install webView for the location map
+    npm install react-native-webview
+#to update react native to the latest version
+    npm install react-native@latest
+    
+    
 #to install(use) mobile async storage
     npm install @react-native-async-storage/async-storage
 #to install checkBox and dropDownLists

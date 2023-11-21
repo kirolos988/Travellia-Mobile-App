@@ -1,19 +1,22 @@
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Favourites from '../pages/Favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HotelReservation from '../pages/Reservation/Hotel-reservation';
 const Tab = createBottomTabNavigator();
+const NotFoundStack = createNativeStackNavigator();
+
+// const RootStack = createNativeStackNavigator();
 
 const Router = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          inactiveTintColor: 'gray', 
+          inactiveTintColor: 'gray',
           tabBarStyle: {
             backgroundColor: '#222',
             borderTopColor: '#222',
@@ -24,7 +27,7 @@ const Router = () => {
             fontWeight: 'bold',
           },
           headerShown: false,
-          tabBarActiveTintColor: 'white'
+          tabBarActiveTintColor: '#5A5A5A',
         }}
       >
         <Tab.Screen
@@ -41,7 +44,7 @@ const Router = () => {
             tabBarLabel: 'Explore',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
-            tabBarActiveTintColor: 'white'
+            tabBarActiveTintColor: 'white',
           }}
         />
         <Tab.Screen
@@ -58,7 +61,7 @@ const Router = () => {
             tabBarLabel: 'Search',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
-            tabBarActiveTintColor: 'white'
+            tabBarActiveTintColor: 'white',
           }}
         />
         <Tab.Screen
@@ -72,15 +75,14 @@ const Router = () => {
                 color={color}
               />
             ),
-            tabBarLabel: 'Favourites',
+            tabBarLabel: 'Plan',
             tabBarLabelPosition: 'below-icon',
             headerShown: false,
-            tabBarActiveTintColor: 'white'
+            tabBarActiveTintColor: 'white',
           }}
         />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
 export default Router;

@@ -1,10 +1,8 @@
 import React from 'react';
 import Search from '../pages/Search';
-import SearchedHotels from '../pages/SearchedHotels';
-import SearchedRestaurants from '../pages/SearchedRestaurants';
-import SearchedThingsToDo from '../pages/SearchedThingsToDo';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SinglePage from '../pages/SinglePage/SinglePage';
+import SinglePage from '../pages/SinglePage';
+import SearchedCategory from '../pages/SearchedCategory';
 const Stack = createNativeStackNavigator();
 
 const StackSearchNavigator = () => {
@@ -12,8 +10,9 @@ const StackSearchNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
+        headerBackTitle: false,
         headerTitleStyle: {
-          fontSize: 20,
+          fontSize: 10,
           fontWeight: 'bold',
         },
       }}
@@ -24,27 +23,24 @@ const StackSearchNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="SearchedHotels"
-        component={SearchedHotels}
+        name="SearchedCategory"
+        component={SearchedCategory}
         options={{
           title: 'Hotels and Places to Stay',
         }}
       />
-      <Stack.Screen
-        name="SearchedRestaurants"
-        component={SearchedRestaurants}
-      />
-      <Stack.Screen
-        name="SearchedThingsToDo"
-        component={SearchedThingsToDo}
-        options={{
-          title: 'Things To Do',
-        }}
-      />
+
       <Stack.Screen
         name="SinglePage"
         component={SinglePage}
-        options={{ title: 'single page' }}
+        options={{
+          title: '',
+          headerTintColor: 'white',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#181818',
+          },
+        }}
       />
     </Stack.Navigator>
   );

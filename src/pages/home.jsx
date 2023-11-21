@@ -1,62 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import {
-  SafeAreaView,
-  FlatList,
-  StyleSheet,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-import RandomHotelsComponent from '../components/RandomHotelsComponents/RandomHotelsComponents';
-import { hotelsAxios } from '../store/AxiosUrl';
-import Header from '../components/Header/Header';
+import React from 'react';
+import { StyleSheet, ScrollView, Text } from 'react-native';
+import Header from '../components/Header';
+import Addvertise from '../components/adds/Addvertise';
+import RandomCardComponent from '../components/RandomCardComponent/RandomCardComponent';
 
 const Home = () => {
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchHotels = async () => {
-      try {
-        const data = await hotelsAxios();
-        setHotels(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching hotels:', error);
-        setLoading(false);
-      }
-    };
-
-    fetchHotels();
-  }, []);
-
   return (
     <ScrollView style={styles.mainContainer}>
       <Header />
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : hotels.length > 0 ? (
-        <FlatList
-          horizontal
-          snapToInterval={70}
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          legacyImplementation={false}
-          data={hotels}
-          renderItem={({ item }) => (
-            <RandomHotelsComponent
-              image={item.images[0]}
-              name={item.name}
-              rating={item.rating}
-              locationName={item.location.locationName}
-              reviews={item.reviews}
-            />
-          )}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      ) : (
-        <Text>No hotels available</Text>
-      )}
+      <RandomCardComponent category={'hotels'} categoryName="Hotels" />
+      <Addvertise
+        img={'roadtrips.jpg'}
+        header="The Essential road-trip guide"
+        text="Everything you need to pack up, drive.and enjoy the ride."
+      />
+      <RandomCardComponent
+        category={'restaurants'}
+        categoryName="Restaurants"
+      />
+      <Addvertise
+        img={'europe.jpg'}
+        header="Do something different this Thanksgiving"
+        text="Head to Europe for smaller crowds-and tones of memories"
+      />
     </ScrollView>
   );
 };
