@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import Favourites from '../pages/Favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
+import HotelReservation from '../pages/Reservation/Hotel-reservation';
 const Tab = createBottomTabNavigator();
 
 const Router = () => {
