@@ -4,6 +4,8 @@ import Header from '../components/Header';
 import Addvertise from '../components/adds/Addvertise';
 import RandomCardComponent from '../components/RandomCardComponent/RandomCardComponent';
 import Add from '../components/adds/Add';
+// import img1 from '../components/adds/assets/';
+// import img2 from '../components/adds/assets/';
 
 const Home = () => {
   return (
@@ -11,7 +13,7 @@ const Home = () => {
       <Header />
       <RandomCardComponent category={'hotels'} categoryName="Hotels" />
       <Addvertise
-        img={'roadtrips.jpg'}
+        img={require('../components/adds/assets/roadtrips.jpg')}
         header="The Essential road-trip guide"
         text="Everything you need to pack up, drive.and enjoy the ride."
       />
@@ -20,11 +22,11 @@ const Home = () => {
         categoryName="Restaurants"
       />
       <Addvertise
-        img={'europe.jpg'}
+        img={require('../components/adds/assets/europe.jpg')}
         header="Do something different this Thanksgiving"
         text="Head to Europe for smaller crowds-and tones of memories"
       />
-      <Add title="Discover more in Rome " buttonText="Keep exploring" />
+      <Add title="Discover more in Rome" buttonText="Keep exploring" />
     </ScrollView>
   );
 };

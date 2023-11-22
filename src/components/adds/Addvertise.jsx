@@ -5,11 +5,9 @@ import { useNavigation } from '@react-navigation/native';
 
 const Addvertise = ({ img, text, header }) => {
   const navigation = useNavigation();
+
   return (
-    <ImageBackground
-      style={styles.container}
-      source={require(`./assets/${img}`)}
-    >
+    <ImageBackground style={styles.container} source={img}>
       <View style={styles.box}>
         <View style={styles.overlay} />
         <View style={styles.content}>
