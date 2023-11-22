@@ -19,7 +19,7 @@ const SearchedCategory = () => {
     navigation.setOptions({
       title:
         categoryInCity.category.length > 1
-          ? categoryInCity.title
+          ? categoryInCity.title || categoryInCity.discoverTitle
           : categoryInCity.specifiedTitle,
       headerStyle: {
         backgroundColor: '#181818',
