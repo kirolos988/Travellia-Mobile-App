@@ -5,6 +5,7 @@ import Favourites from '../pages/Favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HotelReservation from '../pages/Reservation/Hotel-reservation';
 const Tab = createBottomTabNavigator();
 const NotFoundStack = createNativeStackNavigator();
 
