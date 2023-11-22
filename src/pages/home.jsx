@@ -3,6 +3,7 @@ import { StyleSheet, ScrollView, Text } from 'react-native';
 import Header from '../components/Header';
 import Addvertise from '../components/adds/Addvertise';
 import RandomCardComponent from '../components/RandomCardComponent/RandomCardComponent';
+import Add from '../components/adds/Add';
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
         header="Do something different this Thanksgiving"
         text="Head to Europe for smaller crowds-and tones of memories"
       />
+      <Add title="Discover more in Rome " buttonText="Keep exploring" />
     </ScrollView>
   );
 };

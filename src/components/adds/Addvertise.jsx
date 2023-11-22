@@ -1,8 +1,10 @@
 import { View, Text, ImageBackground } from 'react-native';
 import React from 'react';
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Addvertise = ({ img, text, header }) => {
+  const navigation = useNavigation();
   return (
     <ImageBackground
       style={styles.container}
@@ -16,7 +18,7 @@ const Addvertise = ({ img, text, header }) => {
           <Text style={styles.description}>{text} </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => alert('Read More')}
+            onPress={() => navigation.navigate('Article')}
           >
             <Text style={styles.buttonText}>See More</Text>
           </TouchableOpacity>
