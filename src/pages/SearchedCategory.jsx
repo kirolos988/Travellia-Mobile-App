@@ -5,7 +5,7 @@ import SearchResultComponent from '../components/SearchResultComponent';
 import { Platform } from 'react-native';
 
 const SearchedCategory = () => {
-  const categoryInCity = useRoute().params;
+  const categoryInCity = useRoute().params; //step 4
   const navigation = useNavigation();
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -19,7 +19,7 @@ const SearchedCategory = () => {
     navigation.setOptions({
       title:
         categoryInCity.category.length > 1
-          ? categoryInCity.title
+          ? categoryInCity.title || categoryInCity.discoverTitle
           : categoryInCity.specifiedTitle,
       headerStyle: {
         backgroundColor: '#181818',
@@ -47,6 +47,7 @@ const SearchedCategory = () => {
           reviews={item.reviews}
           website={item.website}
           money={item.money}
+          activeTab={categoryInCity.activeTab}
         />
       )}
     />

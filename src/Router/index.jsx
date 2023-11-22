@@ -6,6 +6,8 @@ import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HotelReservation from '../pages/Reservation/Hotel-reservation';
+import RestrauntReservation from '../pages/Reservation/Restaurant-reservation';
+import ThingsToDoReservation from '../pages/Reservation/ThingsToDo-reservation';
 const Tab = createBottomTabNavigator();
 const NotFoundStack = createNativeStackNavigator();
 
@@ -66,7 +68,7 @@ const Router = () => {
         />
         <Tab.Screen
           name="Favourites"
-          component={Favourites}
+          component={RestrauntReservation}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons

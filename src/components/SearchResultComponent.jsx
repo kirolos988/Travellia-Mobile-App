@@ -15,11 +15,12 @@ const SearchResultComponent = ({
   money,
   address,
   item,
+  activeTab,
 }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const handleNavigation = () => {
-    navigation.navigate('SinglePage', { data: item, title: item.name });
+    navigation.navigate('SinglePage', { data: item, title: item.name ,activeTab:activeTab});
   };
   const favorites = useSelector((state) => state.Favorite.favorites);
   const isFavorite = (todoId) => {

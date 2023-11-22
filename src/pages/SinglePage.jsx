@@ -47,6 +47,7 @@ const SinglePage = () => {
   const screenWidth = Dimensions.get('window').width;
   const [activeIndex, setActiveIndex] = useState(0);
   const navigation = useNavigation();
+  const { activeTab} = categoryData;
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -329,7 +330,17 @@ const SinglePage = () => {
       </ScrollView>
       <View style={styles.fixedButton}>
         <Text style={styles.fixedButtonText}>{money}</Text>
-        <TouchableOpacity style={styles.Touchable} activeOpacity={0.8}>
+        <TouchableOpacity style={styles.Touchable} activeOpacity={0.8}
+        onPress={() => {
+          if (activeTab === 'Hotels') {
+            navigation.navigate('HotelReservation');
+          } else if (activeTab === 'Restaurants') {
+            navigation.navigate('RestaurantReservation');
+          } else if (activeTab === 'ThingsToDo') {
+            navigation.navigate('ThingsToDoReservation');
+          }
+        }}
+        >
           <Text style={{ fontWeight: 'bold' }}>Check availalbity</Text>
         </TouchableOpacity>
       </View>
