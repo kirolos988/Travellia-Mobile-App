@@ -17,7 +17,6 @@ const RandomCardComponent = ({ category, categoryName }) => {
           responseData.data.restaurants ||
           responseData.data.todos;
         const randomCategory = getRandomCards(dataa, 20);
-        console.log(randomCategory);
         setData(randomCategory);
         setLoading(false);
       } catch (error) {

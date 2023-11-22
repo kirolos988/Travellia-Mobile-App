@@ -29,7 +29,6 @@ const StackSearchNavigator = () => {
           title: 'Hotels and Places to Stay',
         }}
       />
-
       <Stack.Screen
         name="SinglePage"
         component={SinglePage}
