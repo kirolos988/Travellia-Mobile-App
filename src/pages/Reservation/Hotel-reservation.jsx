@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import InputHolder from '../../components/InputHolder';
-import { useNavigation } from '@react-navigation/native';
 import { CheckBox } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CalendarInput from '../../components/InputHolder/Calendar';
+import moment from 'moment';
+import { useNavigation } from '@react-navigation/native';
 
 const HotelReservation = () => {
   // const navigation = useNavigation();
@@ -36,6 +37,7 @@ const HotelReservation = () => {
     checkIn: '',
     checkOut: '',
     cardType: 'Visa',
+    address:''
   });
 
   const [formErrs, setFormErrs] = useState({
@@ -56,9 +58,23 @@ const HotelReservation = () => {
   });
 
   const [showCalendarCheckIn, setShowCalendarCheckIn] = useState(false);
+  const [showCalendarCheckOut, setShowCalendarCheckOut] = useState(false);
   const [showCalendarMonth, setShowCalendarMonth] = useState(false);
-    
+
   const handleChange = (name, value) => {
+    let format;
+
+    if (name === 'month') {
+      format = 'MM/YYYY';
+    } else if (name === 'checkIn'|| name === 'checkOut') {
+      format = 'DD/MM/YYYY';
+    }
+
+    // Parse the value into a Moment.js object if needed
+    if (format) {
+      value = value instanceof Date ? moment(value) : moment(value, format);
+    }
+
     if (name === 'csv') {
       setFormInputs((prevInputs) => ({ ...prevInputs, csv: value }));
     } else if (name === 'month') {
@@ -67,31 +83,74 @@ const HotelReservation = () => {
     } else if (name === 'checkIn') {
       setFormInputs((prevInputs) => ({ ...prevInputs, checkIn: value }));
       setShowCalendarCheckIn(false);
-    } else {
+    } else if (name === 'checkOut'){
+      setFormInputs((prevInputs) => ({ ...prevInputs, checkOut: value }));
+      setShowCalendarCheckOut(false);
+    }
+     else {
       setFormInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
     }
   };
-  
-  
-  
-console.log(formInputs.checkIn)
-console.log(formInputs.month)
+
+  const formatDate = (date, format) => {
+    // Use Moment.js to create a moment object
+    const momentDate = moment(date);
+
+    // Format the moment object based on the provided format
+    return momentDate.format(format);
+  };
+
   const validateErrors = async () => {
+    const formattedCheckIn =
+    formInputs.checkIn && moment(formInputs.checkIn).format('DD/MM/YYYY');
+  const formattedCheckOut =
+    formInputs.checkOut && moment(formInputs.checkOut).format('DD/MM/YYYY');
+  const formattedMonth =
+    formInputs.month && moment(formInputs.month).format('MM/YYYY');
+
+    const [selectedMonth, selectedYear] = formattedMonth.split('/');
+    const [selectedCheckInDay, selectedCheckInMonth, selectedCheckInYear]= formattedCheckIn.split('/')
+    const [selectedCheckOutDay, selectedCheckOutMonth, selectedCheckOutYear]= formattedCheckOut.split('/')
     const currentDate = new Date();
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth() + 1;
+    const currentDay = currentDate.getDate();
 
-    const [selectedYear, selectedMonth] = formInputs.month.split('-');
-    const [checkedYear, checkedMonth, checkedDay] =
-      formInputs.checkIn.split('-');
+
+    // Check if formInputs.checkIn is a string before splitting
+    const checkedDateArray =
+      formInputs.checkIn && typeof formInputs.checkIn === 'string'
+        ? formInputs.checkIn.split('-')
+        : [0, 0, 0];
+
+    const [checkedYear, checkedMonth, checkedDay] = checkedDateArray;
+
+    const checkedOutDateArray =
+      formInputs.checkOut && typeof formInputs.checkOut === 'string'
+        ? formInputs.checkOut.split('-')
+        : [0, 0, 0];
+
     const [checkedOutYear, checkedOutMonth, checkedOutDay] =
-      formInputs.checkOut.split('-');
-    const checkInDate = new Date(checkedYear, checkedMonth - 1, checkedDay);
-    const checkOutDate = new Date(
-      checkedOutYear,
-      checkedOutMonth - 1,
-      checkedOutDay,
-    );
+      checkedOutDateArray;
+
+
+    const isExpiredCard =
+  parseInt(selectedYear, 10) < currentYear ||
+  (parseInt(selectedYear, 10) === currentYear && parseInt(selectedMonth, 10) < currentMonth);
+
+  const isInvalidCheckIn =
+  parseInt(selectedCheckInYear, 10) < currentYear ||
+  (parseInt(selectedCheckInYear, 10) === currentYear &&
+    parseInt(selectedCheckInMonth, 10) < currentMonth) ||
+  (parseInt(selectedCheckInYear, 10) === currentYear &&
+    parseInt(selectedCheckInMonth, 10) === currentMonth &&
+    parseInt(selectedCheckInDay, 10) < currentDay);
+
+
+const momentCheckIn = moment(formInputs.checkIn);
+const momentCheckOut = moment(formInputs.checkOut);
+
+
     const errorsExist = Object.values(formErrs).some((error) => error !== '');
     setHasErrors(errorsExist);
 
@@ -128,75 +187,91 @@ console.log(formInputs.month)
         : !/^\d{3}$/.test(formInputs.csv)
         ? 'It should be 3 digits only!'
         : '',
-      monthErr: !formInputs.month.length
+        monthErr:
+      !formattedMonth
         ? 'This field is required!'
-        : `${selectedYear}-${selectedMonth}` < `${currentYear}-${currentMonth}`
-        ? "Sorry, can't complete with expired card"
+        : isExpiredCard
+        ? "Sorry, can't complete with an expired card"
         : '',
-      checkInErr: !formInputs.checkIn.length
-        ? 'This field is required!'
-        : checkInDate < currentDate
-        ? 'Sorry, this date is invalid'
-        : '',
-      checkOutErr: !formInputs.checkOut.length
-        ? 'This field is required!'
-        : checkOutDate < checkInDate
-        ? 'Sorry, this date is invalid'
-        : '',
+          checkInErr:
+          !formattedCheckIn || !formattedCheckIn.length
+            ? 'This field is required!'
+            : isInvalidCheckIn
+            ? 'Sorry, this date is invalid'
+            : '',
+      checkOutErr:
+      !formattedCheckOut || !formattedCheckOut.length
+          ? 'This field is required!'
+          : momentCheckIn.isAfter(momentCheckOut)
+          ? 'Sorry, this date is invalid'
+          : '',
       checkErr: !formInputs.check
         ? 'You must confirm the terms and conditions'
         : '',
     });
   };
 
-  useEffect(() => {
-    validateErrors();
-  }, [formInputs]);
+  const saveFormData = useCallback(async () => {
+    if (!hasErrors) {
+      try {
+        const existingData = await AsyncStorage.getItem('formData');
+        const parsedData = JSON.parse(existingData) || [];
+  
+        console.log('Checking for duplicate:', formInputs.email, formInputs.checkIn);
+const isDuplicate = parsedData.some(
+  (entry) =>
+    entry.email === formInputs.email &&
+    entry.cardNumber === formInputs.cardNumber &&
+    entry.csv === formInputs.csv &&
+    entry.firstNameGuest === formInputs.firstNameGuest &&
+    entry.lastNameGuest === formInputs.lastNameGuest
 
-  const handleSubmit = () => {
+
+    );
+console.log('Is Duplicate?', isDuplicate);
+  
+        if (!isDuplicate) {
+          const newEntry = {
+            firstNameGuest: formInputs.firstNameGuest,
+            lastNameGuest: formInputs.lastNameGuest,
+            bedSize: formInputs.bed,
+            rooms: formInputs.room,
+            email: formInputs.email,
+            phone: formInputs.phone,
+            city: formInputs.city,
+            postalCode: formInputs.postalCode,
+            cardNumber: formInputs.cardNumber,
+            csv: formInputs.csv,
+            checkIn: formInputs.checkIn,
+            checkOut: formInputs.checkOut,
+          };
+  
+          const newData = [...parsedData, newEntry];
+          console.log('New Data:', newData);
+          await AsyncStorage.setItem('formData', JSON.stringify(newData));
+          // navigation.navigate('/reservation/successfully');
+        }
+      } catch (error) {
+        console.error('Error saving data:', error);
+      }
+    }
+  }, [formInputs, hasErrors]);
+
+  const handleSubmit = async () => {
     const errorsExist = Object.values(formErrs).some((error) => error !== '');
     setHasErrors(errorsExist);
     if (
       !errorsExist &&
       Object.values(formInputs).some((value) => value !== '')
     ) {
-      const saveFormData = async () => {
-        if (!hasErrors) {
-          try {
-            const existingData =
-              JSON.parse(await AsyncStorage.getItem('formData')) || [];
-            const isDuplicate = existingData.some((entry) =>
-              Object.keys(entry).every((key) => entry[key] === formInputs[key]),
-            );
-
-            if (!isDuplicate) {
-              const newEntry = {
-                firstNameGuest: formInputs.firstNameGuest,
-                lastNameGuest: formInputs.lastNameGuest,
-                firstNameBilling: formInputs.firstNameBilling,
-                lastNameBilling: formInputs.lastNameBilling,
-                email: formInputs.email,
-                phone: formInputs.phone,
-                city: formInputs.city,
-                postalCode: formInputs.postalCode,
-                cardNumber: formInputs.cardNumber,
-              };
-
-              const newData = [...existingData, newEntry];
-              console.log('New Data:', newData);
-              await AsyncStorage.setItem('formData', JSON.stringify(newData));
-              // navigation.navigate('/reservation/successfully');
-            }
-          } catch (error) {
-            console.error('Error saving data:', error);
-          }
-        }
-      };
       saveFormData();
-      // validateErrors();
     }
   };
 
+  useEffect(() => {
+    validateErrors();
+    // saveFormData();
+  }, [formInputs]);
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -303,11 +378,20 @@ console.log(formInputs.month)
               <InputHolder
                 style={styles.input}
                 type="date"
-                placeholder={formInputs.checkIn?formInputs.checkIn: 'MM/YYYY' }
-                value={formInputs.checkIn}
-                editable={false}
+                placeholder={
+                  formInputs.checkIn
+                    ? formInputs.checkIn.format('DD/MM/YYYY')
+                    : 'DD/MM/YYYY'
+                }
+                value={
+                  formInputs.checkIn
+                    ? formInputs.checkIn.format('DD/MM/YYYY')
+                    : ''
+                }
+                readOnly
               />
             </TouchableOpacity>
+
             <Text>
               {formErrs.checkInErr && (
                 <Text style={styles.errorText}>{formErrs.checkInErr}</Text>
@@ -320,30 +404,51 @@ console.log(formInputs.month)
                   initialView="day"
                   handleChange={(value, name) => handleChange(value, name)}
                   isVisible={showCalendarCheckIn}
-                  name='checkIn'
+                  name="checkIn"
                   onDateChange={(date) => handleChange('checkIn', date)}
-                  />
+                />
               ) : null}
             </View>
-            </View>
+          </View>
           <View style={styles.formGroup}>
-            <Text style={styles.label}>Check-Out date</Text>
-            <InputHolder
-              style={styles.input}
-              type="date"
-              placeholder="MM/YYYY"
-              value={formInputs.checkOut}
-              handleChange={(value, name) => handleChange(value, name)}
-              name="checkOut"
-            />
+            <Text style={styles.label}>Check-Out Date</Text>
+            <TouchableOpacity onPress={() => setShowCalendarCheckOut(true)}>
+              <InputHolder
+                style={styles.input}
+                type="date"
+                placeholder={
+                  formInputs.checkOut
+                    ? formInputs.checkOut.format('DD/MM/YYYY')
+                    : 'DD/MM/YYYY'
+                }
+                value={
+                  formInputs.checkOut
+                    ? formInputs.checkOut.format('DD/MM/YYYY')
+                    : ''
+                }
+                readOnly={false}
+              />
+            </TouchableOpacity>
+
             <Text>
               {formErrs.checkOutErr && (
                 <Text style={styles.errorText}>{formErrs.checkOutErr}</Text>
               )}
             </Text>
+            <View>
+              {showCalendarCheckOut ? (
+                <CalendarInput
+                  width={250}
+                  initialView="day"
+                  handleChange={(value, name) => handleChange(value, name)}
+                  isVisible={showCalendarCheckOut}
+                  name="checkOut"
+                  onDateChange={(date) => handleChange('checkOut', date)}
+                />
+              ) : null}
+            </View>
           </View>
-        </View>
-
+          </View>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Billing Details</Text>
 
@@ -431,14 +536,6 @@ console.log(formInputs.month)
                 <Text style={styles.errorText}>{formErrs.phoneErr}</Text>
               )}
             </Text>
-          </View>
-          <View style={styles.inputContainer}>
-            <Text>Billing address</Text>
-            <InputHolder
-              placeholder="Billing address"
-              type="text"
-              style={styles.input}
-            />
           </View>
           <View style={styles.inputContainer}>
             <Text>Email Address</Text>
@@ -533,11 +630,18 @@ console.log(formInputs.month)
               <InputHolder
                 style={styles.input}
                 type="date"
-                placeholder={formInputs.month?formInputs.month: 'MM/YYYY' }
-                value={formInputs.month}
-                editable={false}
+                placeholder={
+                  formInputs.month
+                    ? formInputs.month.format('MM/YYYY')
+                    : 'MM/YYYY'
+                }
+                value={
+                  formInputs.month ? formInputs.month.format('MM/YYYY') : ''
+                }
+                readOnly
               />
             </TouchableOpacity>
+
             <Text>
               {formErrs.monthErr && (
                 <Text style={styles.errorText}>{formErrs.monthErr}</Text>
@@ -551,7 +655,7 @@ console.log(formInputs.month)
                   handleChange={(value, name) => handleChange(value, name)}
                   isVisible={showCalendarMonth}
                   onDateChange={(date) => handleChange('month', date)}
-                  />
+                />
               ) : null}
             </View>
           </View>
@@ -600,9 +704,10 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 16,
-    backgroundColor: '#aaa',
+    backgroundColor: '#ccc',
     borderRadius: 5,
     paddingHorizontal: 10,
+    paddingBottom:10
   },
   sectionTitle: {
     fontSize: 20,

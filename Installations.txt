@@ -24,7 +24,8 @@
     npm install react-native-webview
 #to update react native to the latest version
     npm install react-native@latest
-    
+
+#to install redux toolkit
     
 #to install(use) mobile async storage
     npm install @react-native-async-storage/async-storage

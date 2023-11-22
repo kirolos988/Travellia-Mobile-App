@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
 
-function InputHolder({ type, placeholder, value, handleChange, style, name, editable}) {
+function InputHolder({ type, placeholder, value, handleChange, style, name, readOnly}) {
   const [inputValue, setInputValue] = useState(value);
 
   const onChangeText = (text) => {
@@ -22,7 +22,7 @@ function InputHolder({ type, placeholder, value, handleChange, style, name, edit
         style={style} // You can pass a style object for styling
         underlineColorAndroid="transparent" // Removes the underline on Android
         name={name}
-        editable={editable}
+        readOnly={readOnly}
       />
     
   );
