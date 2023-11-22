@@ -68,7 +68,7 @@ const Router = () => {
         />
         <Tab.Screen
           name="Favourites"
-          component={Favourites}
+          component={RestrauntReservation}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons

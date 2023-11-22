@@ -3,6 +3,9 @@ import Search from '../pages/Search';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SinglePage from '../pages/SinglePage';
 import SearchedCategory from '../pages/SearchedCategory';
+import HotelReservation from '../pages/Reservation/Hotel-reservation';
+import RestrauntReservation from '../pages/Reservation/Restaurant-reservation';
+import ThingsToDoReservation from '../pages/Reservation/ThingsToDo-reservation';
 const Stack = createNativeStackNavigator();
 
 const StackSearchNavigator = () => {
@@ -12,7 +15,7 @@ const StackSearchNavigator = () => {
         headerTitleAlign: 'center',
         headerBackTitle: false,
         headerTitleStyle: {
-          fontSize: 10,
+          fontSize: 20,
           fontWeight: 'bold',
         },
       }}
@@ -40,6 +43,39 @@ const StackSearchNavigator = () => {
           headerStyle: {
             backgroundColor: '#181818',
           },
+        }}
+      />
+       <Stack.Screen
+        name="Hotel Reservation"
+        component={HotelReservation}
+        options={{
+          title: 'Hotel Reservation',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
+        }}
+      />
+      <Stack.Screen
+        name="Restraunt Reservation"
+        component={RestrauntReservation}
+        options={{
+          title: 'Restraunt Reservation',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
+        }}
+      />
+      <Stack.Screen
+        name="Trip Reservation"
+        component={ThingsToDoReservation}
+        options={{
+          title: 'Trip Reservation',
+          headerTintColor:"white",
+          headerStyle:{
+            backgroundColor:"#181818",
+          }
         }}
       />
     </Stack.Navigator>

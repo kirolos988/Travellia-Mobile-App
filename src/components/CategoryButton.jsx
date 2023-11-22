@@ -8,13 +8,13 @@ import {
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { Axios } from '../store/AxiosUrl';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; ///step 1
 
 const CategoryButton = () => {
   const [activeTab, setActiveTab] = useState('Hotels');
   const [inputVal, setInputVal] = useState('');
   const [category, setCategory] = useState('');
-  const navigation = useNavigation();
+  const navigation = useNavigation(); //step 2
   const [data, setData] = useState([]);
 
   function capitalizeFirstLetter(inputString) {
@@ -26,10 +26,11 @@ const CategoryButton = () => {
       console.log(data);
       setData(data);
       if (data.length > 0) {
-        navigation.navigate('SearchedCategory', {
+        navigation.navigate('SearchedCategory', { //step 3
           category: data,
           title: `"${inputVal}" ${activeTab} `,
           specifiedTitle: `${inputVal}`,
+          activeTab:`${activeTab}`
         });
       } else {
         return;
