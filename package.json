@@ -24,11 +24,7 @@
     "moment": "^2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-<<<<<<< HEAD
-    "react-native": "0.72.6",
-=======
     "react-native": "^0.72.7",
->>>>>>> d5a4a753b4a0ab10ef95c935c83018f224b32334
     "react-native-calendar-picker": "^7.1.4",
     "react-native-elements": "^3.4.3",
     "react-native-picker-select": "^9.0.0",
