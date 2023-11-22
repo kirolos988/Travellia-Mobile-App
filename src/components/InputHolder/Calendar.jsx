@@ -23,8 +23,8 @@ export default class CalendarInput extends Component {
   }
 
   render() {
-    const { selectedStartDate } = this.state;
-    const startDate = selectedStartDate ? selectedStartDate.toString() : '';
+    // const { selectedStartDate } = this.state;
+    // const startDate = selectedStartDate ? selectedStartDate.toString() : '';
     const { width, horizontal, initialView , isVisible,onDateChange} = this.props;
 
     return (
