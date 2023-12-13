@@ -42,7 +42,7 @@ export const { setFavorites, addToFavorites, removeFromFavorites } =
 export default favoritesSlice.reducer;
 
 // Action to load favorites from AsyncStorage
-export const loadFavorites = () => async () => {
+export const loadFavorites = () => async (dispatch) => {
   try {
     const favorites = await AsyncStorage.getItem('favorites');
     if (favorites) {
