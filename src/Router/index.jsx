@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
-import Favourites from '../pages/Favourites';
+import Favourites from '../pages/favourites';
 import StackExploreNavigator from './StackExploreNavigator';
 import StackSearchNavigator from './StackSearchNavigator';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
